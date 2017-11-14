@@ -1,0 +1,63 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+ext {
+    //Java
+    javaCompatibility = JavaVersion.VERSION_1_8
+
+    //Android
+    androidBuildToolsVersion = "27.0.0"
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 26
+    androidCompileSdkVersion = 26
+
+    //Libraries version
+    appCompatVersion = '26.1.0'
+    androidArchVersion = '1.0.0'
+    leakCanaryVersion = '1.5.4'
+    stethoVersion = '1.5.0'
+    lombokVersion = '1.16.18'
+    retrofitVersion = '2.3.0'
+    gsonVersion = '2.8.2'
+    daggerVersion = '2.13'
+    rxAndroidVersion = '2.0.1'
+    rxJavaVersion = '2.1.6'
+    butterknifeVersion = '8.8.1'
+    timberVersion = '4.6.0'
+    javaxInjectVersion = '1@jar'
+
+    junitVersion = '4.12'
+    espressoVersion = '2.2.2'
+
+    //Libraries
+    appCompat = "com.android.support:appcompat-v7:${appCompatVersion}"
+    lifecycleJava8 = "android.arch.lifecycle:common-java8:${androidArchVersion}"
+    lifecycleCompiler = "android.arch.lifecycle:compiler:${androidArchVersion}"
+    lifecycleExtensions = "android.arch.lifecycle:extensions:${androidArchVersion}"
+    leakCanary = "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+    leakCanaryNoOp = "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
+    stetho = "com.facebook.stetho:stetho:${stethoVersion}"
+    lombok = "org.projectlombok:lombok:${lombokVersion}"
+    retrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    gson = "com.google.code.gson:gson:${gsonVersion}"
+    roomRuntime = "android.arch.persistence.room:runtime:${androidArchVersion}"
+    roomCompiler = "android.arch.persistence.room:compiler:${androidArchVersion}"
+    rxAndroid = "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    dagger = "com.google.dagger:dagger:${daggerVersion}"
+    daggerCompiler = "com.google.dagger:dagger-compiler:${daggerVersion}"
+    daggerAndroid = "com.google.dagger:dagger-android-support:${daggerVersion}"
+    daggerAndroidCompiler = "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    rxJava = "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    butterknife = "com.jakewharton:butterknife:${butterknifeVersion}"
+    butterknifeCompiler = "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+    timber = "com.jakewharton.timber:timber:${timberVersion}"
+    javaxInject = "javax.inject:javax.inject:${javaxInjectVersion}"
+
+    junit = "com.android.support:appcompat-v7:${junitVersion}"
+    espresso = "com.android.support.test.espresso:espresso-core:${espressoVersion}"
+}
