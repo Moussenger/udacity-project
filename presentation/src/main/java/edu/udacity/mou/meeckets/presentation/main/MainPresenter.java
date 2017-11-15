@@ -17,5 +17,4 @@ public class MainPresenter extends MeecketsPresenter<MainActivity, ViewModel> {
     public MainPresenter(MainActivity mainActivity) {
         super(mainActivity);
     }
-
 }

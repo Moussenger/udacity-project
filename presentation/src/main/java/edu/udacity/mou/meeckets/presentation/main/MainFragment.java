@@ -7,15 +7,16 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import edu.udacity.mou.meeckets.R;
 import edu.udacity.mou.meeckets.presentation.MeecketsFragment;
+import edu.udacity.mou.meeckets.presentation.R;
+import edu.udacity.mou.meeckets.presentation.R2;
 
 /**
  * Created by mou on 11/11/17.
  */
 
 public class MainFragment extends MeecketsFragment<MainFragmentPresenter, MainViewModel> {
-    @BindView(R.id.token_text)
+    @BindView(R2.id.token_text)
     TextView tokenView;
 
     @Inject
@@ -49,7 +50,7 @@ public class MainFragment extends MeecketsFragment<MainFragmentPresenter, MainVi
         tokenView.setText(token);
     }
 
-    @OnClick(R.id.login_button)
+    @OnClick(R2.id.login_button)
     protected void onLoginClicked(View view) {
         presenter.onLoginClick();
     }

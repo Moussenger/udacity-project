@@ -2,8 +2,8 @@ package edu.udacity.mou.meeckets.presentation.main;
 
 import javax.inject.Inject;
 
-import edu.udacity.mou.meeckets.R;
 import edu.udacity.mou.meeckets.presentation.MeecketsActivity;
+import edu.udacity.mou.meeckets.presentation.R;
 
 /**
  * Created by mou on 11/11/17.
