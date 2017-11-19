@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">presentation</string>
+    <string name="user_password_invalid">User or password invalid</string>
+    <string name="generic_server_error">Internal Server Error</string>
 </resources>

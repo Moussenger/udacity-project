@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="@integer/auth_controls_gravity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/auth_message_text"
+        style="@style/Meeckets.Widget.AuthMessage"
+        android:layout_width="@dimen/auth_controls_size"
+        android:layout_height="wrap_content"
+        tools:text="-Token-" />
+
+    <EditText
+        android:id="@+id/auth_username_edit"
+        style="@style/Meeckets.Widget.AuthEditText"
+        android:layout_width="@dimen/auth_controls_size"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/auth_password_edit"
+        style="@style/Meeckets.Widget.AuthEditText"
+        android:layout_width="@dimen/auth_controls_size"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <FrameLayout
+        android:layout_width="@dimen/auth_controls_size"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/auth_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="login" />
+
+        <ProgressBar
+            android:id="@+id/auth_loading_progress"
+            android:layout_width="@dimen/auth_loading_size"
+            android:layout_height="@dimen/auth_loading_size"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+
+</LinearLayout>

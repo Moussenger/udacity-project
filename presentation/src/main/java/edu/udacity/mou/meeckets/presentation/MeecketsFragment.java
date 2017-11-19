@@ -2,7 +2,6 @@ package edu.udacity.mou.meeckets.presentation;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +22,7 @@ public abstract class MeecketsFragment<P extends MeecketsPresenter, VM extends V
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        attachComponents();
         View view = inflater.inflate(layout(), container, false);
         ButterKnife.bind(this, view);
         init(view);
@@ -31,15 +31,18 @@ public abstract class MeecketsFragment<P extends MeecketsPresenter, VM extends V
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onDestroyView() {
+        detachComponents();
+        super.onDestroyView();
+    }
+
+    protected void attachComponents() {
         AndroidSupportInjection.inject(this);
         loadViewModel();
         configPresenter();
     }
 
-    @Override
-    public void onDetach() {
+    protected void detachComponents() {
         getPresenter().detachLifecycle(getLifecycle());
         getPresenter().detachView();
         super.onDetach();

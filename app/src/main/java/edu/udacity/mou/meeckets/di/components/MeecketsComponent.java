@@ -15,7 +15,6 @@ import edu.udacity.mou.meeckets.di.modules.data.datasources.NetworkDatasourcesMo
 import edu.udacity.mou.meeckets.di.modules.domain.InteractorsModule;
 import edu.udacity.mou.meeckets.di.modules.domain.SchedulersModule;
 import edu.udacity.mou.meeckets.di.modules.presentation.ActivityBuilderModule;
-import edu.udacity.mou.meeckets.di.modules.presentation.FragmentBuilderModule;
 
 /**
  * Created by mou on 11/11/17.
@@ -30,7 +29,7 @@ import edu.udacity.mou.meeckets.di.modules.presentation.FragmentBuilderModule;
         DatabaseDatasourcesModule.class,
         RepositoriesModule.class,
         ActivityBuilderModule.class,
-        FragmentBuilderModule.class
+        //FragmentBuilderModule.class
 })
 @Singleton
 public interface MeecketsComponent {

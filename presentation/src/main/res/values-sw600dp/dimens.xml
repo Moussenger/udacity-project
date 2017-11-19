@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="auth_controls_gravity">@integer/center_horizontal</integer>
+    <dimen name="auth_controls_size">328dp</dimen>
+    <dimen name="auth_logo_size">200dp</dimen>
+</resources>

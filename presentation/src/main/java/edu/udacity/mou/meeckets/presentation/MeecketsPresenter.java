@@ -8,26 +8,16 @@ import android.support.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
 
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-
 /**
  * Created by mou on 11/11/17.
  */
 
-public abstract class MeecketsPresenter<V, VM extends ViewModel> implements DefaultLifecycleObserver {
+public abstract class MeecketsPresenter<V extends MeecketsActivity, VM extends ViewModel> implements DefaultLifecycleObserver {
     private WeakReference<V> viewReference;
     private VM viewModel;
-    private CompositeDisposable compositeDisposable;
-
-    public MeecketsPresenter(V view) {
-        viewReference = new WeakReference<>(view);
-        compositeDisposable = new CompositeDisposable();
-    }
 
     @Override
     public void onDestroy(@NonNull LifecycleOwner owner) {
-        compositeDisposable.clear();
         detachView();
     }
 
@@ -43,12 +33,19 @@ public abstract class MeecketsPresenter<V, VM extends ViewModel> implements Defa
         lifecycle.removeObserver(this);
     }
 
-    public void detachView() {
-        viewReference.clear();
+    public void attachView(V view) {
+        detachView();
+        viewReference = new WeakReference<>(view);
     }
 
-    public void disposable(Disposable disposable) {
-        compositeDisposable.add(disposable);
+    public void detachView() {
+        if (viewReference != null) {
+            viewReference.clear();
+        }
+    }
+
+    public void onViewModelCleared() {
+        viewModel = null;
     }
 
     protected V getView() {

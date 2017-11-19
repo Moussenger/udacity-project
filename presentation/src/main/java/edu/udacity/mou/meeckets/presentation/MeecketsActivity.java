@@ -1,34 +1,28 @@
 package edu.udacity.mou.meeckets.presentation;
 
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
+import timber.log.Timber;
 
 /**
  * Created by mou on 11/11/17.
  */
 
-public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends ViewModel> extends AppCompatActivity implements HasSupportFragmentInjector {
+public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends MeecketsViewModel<P>> extends AppCompatActivity {
     private VM viewModel;
 
-    @Inject
-    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return fragmentDispatchingAndroidInjector;
-    }
+//    @Inject
+//    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+//
+//    @Override
+//    public AndroidInjector<Fragment> supportFragmentInjector() {
+//        return fragmentDispatchingAndroidInjector;
+//    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +30,7 @@ public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends V
         AndroidInjection.inject(this);
         setContentView(layout());
         loadViewModel();
+        loadPresenter();
         configPresenter();
         ButterKnife.bind(this);
         init();
@@ -52,24 +47,39 @@ public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends V
         viewModel = ViewModelProviders.of(this).get(viewModel());
     }
 
-    protected void init() {
-        // Nothing to do here. Just for extends creation in childs.
+    protected void loadPresenter() {
+        if (viewModel.presenter() == null) {
+            Timber.d(getTag() + " - Presenter created");
+            viewModel.presenter(createPresenter());
+        } else {
+            Timber.d(getTag() + " - Presenter reused");
+        }
     }
 
     @SuppressWarnings("unchecked")
     protected void configPresenter() {
+        getPresenter().attachView(this);
         getPresenter().attachLifecycle(getLifecycle());
         getPresenter().attachViewModel(getViewModel());
+    }
+
+    protected P getPresenter() {
+        return viewModel.presenter();
     }
 
     protected VM getViewModel() {
         return viewModel;
     }
 
+    protected void init() {
+        // Nothing to do here. Just for extends creation in childs.
+    }
+
     protected abstract int layout();
 
     protected abstract Class<VM> viewModel();
 
-    protected abstract P getPresenter();
+    protected abstract P createPresenter();
 
+    protected abstract String getTag();
 }

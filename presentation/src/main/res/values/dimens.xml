@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_margin">16dp</dimen>
+    <dimen name="base_text_mini">12sp</dimen>
+    <dimen name="base_text">16sp</dimen>
+
+    <dimen name="base_activity_margin">@dimen/base_margin</dimen>
+
+    <dimen name="auth_logo_size">150dp</dimen>
+    <dimen name="auth_controls_size">@dimen/match_parent</dimen>
+    <dimen name="auth_loading_size">32dp</dimen>
+    <integer name="auth_controls_gravity">@integer/center</integer>
+    <integer name="auth_layout_orientation">1</integer> <!-- 1 = vertical -->
+</resources>

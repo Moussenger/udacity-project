@@ -2,7 +2,7 @@ package edu.udacity.mou.meeckets.di.modules.data.datasources;
 
 import dagger.Module;
 import dagger.Provides;
-import edu.udacity.mou.meeckets.data.datasources.network.auth.AuthNetworkDatasource;
+import edu.udacity.mou.meeckets.data.datasources.network.auth.MockAuthNetworkDatasource;
 import edu.udacity.mou.meeckets.data.datasources.network.auth.IAuthNetworkDatasource;
 
 /**
@@ -13,6 +13,6 @@ import edu.udacity.mou.meeckets.data.datasources.network.auth.IAuthNetworkDataso
 public class NetworkDatasourcesModule {
     @Provides
     public IAuthNetworkDatasource provideAuthNetworkDatasource() {
-        return new AuthNetworkDatasource();
+        return new MockAuthNetworkDatasource();
     }
 }

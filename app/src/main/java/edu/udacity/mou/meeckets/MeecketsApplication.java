@@ -13,6 +13,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import edu.udacity.mou.meeckets.di.components.DaggerMeecketsComponent;
+import io.reactivex.plugins.RxJavaPlugins;
 import timber.log.Timber;
 
 /**
@@ -30,6 +31,7 @@ public class MeecketsApplication extends Application implements HasActivityInjec
             configDI();
             configTimber();
             configStetho();
+            configRx();
         }
 
     }
@@ -59,6 +61,10 @@ public class MeecketsApplication extends Application implements HasActivityInjec
 
     private void configStetho() {
         Stetho.initializeWithDefaults(this);
+    }
+
+    private void configRx() {
+        RxJavaPlugins.setErrorHandler(Timber::e);
     }
 
     @Override

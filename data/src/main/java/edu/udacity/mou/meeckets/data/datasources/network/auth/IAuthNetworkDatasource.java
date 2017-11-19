@@ -1,6 +1,7 @@
 package edu.udacity.mou.meeckets.data.datasources.network.auth;
 
 import edu.udacity.mou.meeckets.data.model.network.responses.AuthResponse;
+import edu.udacity.mou.meeckets.domain.exceptions.ServerException;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
 
 /**
@@ -8,5 +9,5 @@ import edu.udacity.mou.meeckets.domain.model.auth.Login;
  */
 
 public interface IAuthNetworkDatasource {
-    AuthResponse login(Login parameter);
+    AuthResponse login(Login parameter) throws ServerException;
 }

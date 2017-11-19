@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="meecketsGray">#ff2f4050</color>
+    <color name="meecketsGrayLight">#ff596b7c</color>
+    <color name="meecketsGrayDark">#ff071a28</color>
+    <color name="meecketsYellow">#ffffd400</color>
+    <color name="meecketsRed">#ffff0a00</color>
+    <color name="meecketsBlackSaver">#80000000</color>
+    <color name="meecketsWhiteSaver">#80FFFFFF</color>
+
+    <color name="white">#ffffffff</color>
+</resources>

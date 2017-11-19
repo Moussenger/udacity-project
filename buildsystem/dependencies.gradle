@@ -16,7 +16,7 @@ ext {
     androidCompileSdkVersion = 26
 
     //Libraries version
-    appCompatVersion = '26.1.0'
+    appCompatVersion = '27.0.0'
     androidArchVersion = '1.0.0'
     leakCanaryVersion = '1.5.4'
     stethoVersion = '1.5.0'

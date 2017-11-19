@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Meeckets.Base.Activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="@integer/auth_layout_orientation"
+    android:weightSum="2">
+
+    <include layout="@layout/layout_auth_logo" />
+
+    <include layout="@layout/layout_auth_form" />
+
+</LinearLayout>
