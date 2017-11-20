@@ -1,4 +1,4 @@
-package edu.udacity.mou.meeckets.presentation;
+package edu.udacity.mou.meeckets.presentation.views;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
-import timber.log.Timber;
 
 /**
  * Created by mou on 11/11/17.
@@ -49,10 +48,7 @@ public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends M
 
     protected void loadPresenter() {
         if (viewModel.presenter() == null) {
-            Timber.d(getTag() + " - Presenter created");
             viewModel.presenter(createPresenter());
-        } else {
-            Timber.d(getTag() + " - Presenter reused");
         }
     }
 

@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/auth_logo_image"
         android:layout_width="@dimen/auth_logo_size"
         android:layout_height="@dimen/auth_logo_size"
         android:src="@drawable/meeckets_light" />

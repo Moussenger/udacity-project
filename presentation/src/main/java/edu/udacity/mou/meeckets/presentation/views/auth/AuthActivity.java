@@ -1,4 +1,4 @@
-package edu.udacity.mou.meeckets.presentation.auth;
+package edu.udacity.mou.meeckets.presentation.views.auth;
 
 import android.text.Editable;
 import android.view.View;
@@ -7,20 +7,25 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
-import edu.udacity.mou.meeckets.presentation.MeecketsActivity;
 import edu.udacity.mou.meeckets.presentation.R;
 import edu.udacity.mou.meeckets.presentation.R2;
+import edu.udacity.mou.meeckets.presentation.views.MeecketsActivity;
 
 /**
  * Created by mou on 11/11/17.
  */
 
 public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel> {
+    public static final String EMPTY = "";
+
     @Inject
     AuthPresenter presenter;
 
@@ -39,6 +44,9 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
     @BindView(R2.id.auth_loading_progress)
     ProgressBar authLoadingProgress;
 
+    @BindViews({R2.id.auth_logo_image, R2.id.auth_username_edit, R2.id.auth_password_edit, R2.id.auth_login_button})
+    List<View> viewsToAnimate;
+
     @Override
     public int layout() {
         return R.layout.activity_auth;
@@ -46,9 +54,9 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
 
     @Override
     protected void init() {
-        getViewModel().message().observe(this, this::showMessage);
-        getViewModel().loginEnabled().observe(this, this::enableLogin);
         getViewModel().authState().observe(this, this::enableLoading);
+        getViewModel().authErrorState().observe(this, this::manageError);
+        getViewModel().loginEnabled().observe(this, this::enableLogin);
     }
 
     @Override
@@ -85,6 +93,20 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
         }
     }
 
+    private void manageError(AuthViewModel.AuthErrorState authErrorState) {
+        switch (authErrorState) {
+            case NO_ERROR:
+                onNoError();
+                break;
+            case INVALID_CREDENTIALS:
+                onInvalidCredentials();
+                break;
+            case GENERIC_ERROR:
+                onGenericError();
+                break;
+        }
+    }
+
     private void onReady() {
         authLoginButton.setVisibility(View.VISIBLE);
         authLoadingProgress.setVisibility(View.INVISIBLE);
@@ -97,6 +119,19 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
         authLoadingProgress.setVisibility(View.VISIBLE);
         authUsernameEditText.setEnabled(false);
         authPasswordEditText.setEnabled(false);
+    }
+
+    private void onNoError() {
+        showMessage(EMPTY);
+    }
+
+    private void onInvalidCredentials() {
+        showMessage(getString(R.string.user_password_invalid));
+        authUsernameEditText.requestFocus();
+    }
+
+    private void onGenericError() {
+        showMessage(getString(R.string.generic_server_error));
     }
 
     @OnTextChanged(R2.id.auth_username_edit)

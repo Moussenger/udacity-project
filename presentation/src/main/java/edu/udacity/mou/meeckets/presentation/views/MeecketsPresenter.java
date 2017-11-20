@@ -1,4 +1,4 @@
-package edu.udacity.mou.meeckets.presentation;
+package edu.udacity.mou.meeckets.presentation.views;
 
 import android.arch.lifecycle.DefaultLifecycleObserver;
 import android.arch.lifecycle.Lifecycle;

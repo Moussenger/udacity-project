@@ -1,8 +1,8 @@
-package edu.udacity.mou.meeckets.presentation.auth;
+package edu.udacity.mou.meeckets.presentation.views.auth;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import edu.udacity.mou.meeckets.presentation.MeecketsViewModel;
+import edu.udacity.mou.meeckets.presentation.views.MeecketsViewModel;
 
 /**
  * Created by mou on 11/13/17.
@@ -13,8 +13,12 @@ public class AuthViewModel extends MeecketsViewModel<AuthPresenter> {
         READY, LOADING
     }
 
+    public enum AuthErrorState {
+        NO_ERROR, INVALID_CREDENTIALS, GENERIC_ERROR
+    }
+
     private MutableLiveData<AuthState> authState = new MutableLiveData<>();
-    private MutableLiveData<String> message = new MutableLiveData<>();
+    private MutableLiveData<AuthErrorState> authErrorState = new MutableLiveData<>();
     private MutableLiveData<String> username = new MutableLiveData<>();
     private MutableLiveData<String> password = new MutableLiveData<>();
     private MutableLiveData<Boolean> loginEnabled = new MutableLiveData<>();
@@ -27,8 +31,8 @@ public class AuthViewModel extends MeecketsViewModel<AuthPresenter> {
         return authState;
     }
 
-    MutableLiveData<String> message() {
-        return message;
+    MutableLiveData<AuthErrorState> authErrorState() {
+        return authErrorState;
     }
 
     MutableLiveData<String> username() {
@@ -53,8 +57,18 @@ public class AuthViewModel extends MeecketsViewModel<AuthPresenter> {
         return this;
     }
 
-    AuthViewModel message(String newToken) {
-        message.setValue(newToken);
+    AuthViewModel noError() {
+        authErrorState.setValue(AuthErrorState.NO_ERROR);
+        return this;
+    }
+
+    AuthViewModel invalidCredentials() {
+        authErrorState.setValue(AuthErrorState.INVALID_CREDENTIALS);
+        return this;
+    }
+
+    AuthViewModel genericError() {
+        authErrorState.setValue(AuthErrorState.GENERIC_ERROR);
         return this;
     }
 

@@ -1,6 +1,5 @@
-package edu.udacity.mou.meeckets.presentation.auth;
+package edu.udacity.mou.meeckets.presentation.views.auth;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import javax.inject.Inject;
@@ -8,8 +7,7 @@ import javax.inject.Inject;
 import edu.udacity.mou.meeckets.domain.exceptions.InvalidCredentialsException;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogin;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
-import edu.udacity.mou.meeckets.presentation.MeecketsPresenter;
-import edu.udacity.mou.meeckets.presentation.R;
+import edu.udacity.mou.meeckets.presentation.views.MeecketsPresenter;
 
 /**
  * Created by mou on 11/11/17.
@@ -35,7 +33,7 @@ public class AuthPresenter extends MeecketsPresenter<AuthActivity, AuthViewModel
 
     public void onLoginClick() {
         getViewModel().loading();
-        clearMessage();
+        getViewModel().noError();
 
         Login parameter = Login.builder()
                 .username(getViewModel().username().getValue())
@@ -43,10 +41,6 @@ public class AuthPresenter extends MeecketsPresenter<AuthActivity, AuthViewModel
                 .build();
 
         doLogin.run(parameter).subscribe(this::onLoginSuccess, this::onLoginError);
-    }
-
-    private void clearMessage() {
-        getViewModel().message().setValue("");
     }
 
     private void enableLogin() {
@@ -62,20 +56,12 @@ public class AuthPresenter extends MeecketsPresenter<AuthActivity, AuthViewModel
     }
 
     private void onLoginError(Throwable error) {
-        Context context = getView();
-
-        if (context != null) {
-            getViewModel().message(getError(context, error));
-        }
-
         getViewModel().ready();
-    }
 
-    private String getError(Context context, Throwable error) {
         if (error instanceof InvalidCredentialsException) {
-            return context.getString(R.string.user_password_invalid);
+            getViewModel().invalidCredentials();
         } else {
-            return context.getString(R.string.generic_server_error);
+            getViewModel().genericError();
         }
     }
 }

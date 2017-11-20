@@ -1,8 +1,6 @@
-package edu.udacity.mou.meeckets.presentation;
+package edu.udacity.mou.meeckets.presentation.views;
 
 import android.arch.lifecycle.ViewModel;
-
-import timber.log.Timber;
 
 /**
  * Created by mou on 11/13/17.
@@ -24,8 +22,6 @@ public abstract class MeecketsViewModel<P extends MeecketsPresenter> extends Vie
         if (presenter != null) {
             presenter.onViewModelCleared();
             presenter = null;
-
-            Timber.d(getTag() + " - Presenter cleared");
         }
     }
 
