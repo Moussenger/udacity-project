@@ -6,8 +6,8 @@ import javax.inject.Singleton;
 
 import edu.udacity.mou.meeckets.data.datasources.database.MeecketsDatabaseDatasource;
 import edu.udacity.mou.meeckets.data.datasources.network.auth.IAuthNetworkDatasource;
-import edu.udacity.mou.meeckets.data.model.entities.AuthEntity;
 import edu.udacity.mou.meeckets.data.model.network.responses.AuthResponse;
+import edu.udacity.mou.meeckets.domain.exceptions.database.InsertException;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
 import edu.udacity.mou.meeckets.domain.model.auth.User;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
@@ -59,10 +59,10 @@ public class AuthRepository implements IAuthRepository {
 
     private void saveUser(CompletableEmitter emitter, User user) {
         try {
-            AuthEntity auth = AuthEntity.builder().token(user.getAccessToken()).build();
-            databaseDatasource.authDao().insert(auth);
+            databaseDatasource.deleteUser();
+            databaseDatasource.addUser(user);
             emitter.onComplete();
-        } catch (Exception e) {
+        } catch (InsertException e) {
             emitter.onError(e);
         }
     }

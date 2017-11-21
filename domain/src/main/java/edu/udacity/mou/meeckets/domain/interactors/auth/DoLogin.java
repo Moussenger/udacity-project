@@ -3,7 +3,6 @@ package edu.udacity.mou.meeckets.domain.interactors.auth;
 import javax.inject.Inject;
 
 import edu.udacity.mou.meeckets.domain.device.IMeecketsAccountManager;
-import edu.udacity.mou.meeckets.domain.exceptions.accounts.CreateAccountException;
 import edu.udacity.mou.meeckets.domain.interactors.CompletableUseCase;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
 import edu.udacity.mou.meeckets.domain.model.auth.User;
@@ -38,14 +37,12 @@ public class DoLogin extends CompletableUseCase<Login> {
     private void onUser(CompletableEmitter emitter, User user) {
         try {
             accountManager.saveAccount(user.getAccessToken());
-        } catch (CreateAccountException e) {
+            authRepository.saveUser(user).subscribe(
+                    emitter::onComplete,
+                    emitter::onError
+            );
+        } catch (Exception e) {
             emitter.onError(e);
-            return;
         }
-
-        authRepository.saveUser(user).subscribe(
-                emitter::onComplete,
-                emitter::onError
-        );
     }
 }

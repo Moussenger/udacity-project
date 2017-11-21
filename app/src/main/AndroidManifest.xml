@@ -27,5 +27,11 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
+
+        <provider
+            android:name="edu.udacity.mou.meeckets.data.datasources.database.generated.MeecketsProvider"
+            android:authorities="edu.udacity.mou.meeckets.data"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 </manifest>

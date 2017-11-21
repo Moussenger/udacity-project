@@ -1,13 +1,13 @@
 package edu.udacity.mou.meeckets.di.modules.data.datasources;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
-
-import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
 import edu.udacity.mou.meeckets.data.datasources.database.MeecketsDatabaseDatasource;
+import edu.udacity.mou.meeckets.data.datasources.database.mappers.StorageMapper;
+import edu.udacity.mou.meeckets.data.datasources.database.mappers.UserStorageMapper;
+import edu.udacity.mou.meeckets.domain.model.auth.User;
 
 /**
  * Created by mou on 11/13/17.
@@ -15,22 +15,14 @@ import edu.udacity.mou.meeckets.data.datasources.database.MeecketsDatabaseDataso
 
 @Module
 public class DatabaseDatasourcesModule {
+
     @Provides
-    @Named("database")
-    public Class<MeecketsDatabaseDatasource> provideDatabase() {
-        return MeecketsDatabaseDatasource.class;
+    public StorageMapper<User> provideUserStorageMapper() {
+        return new UserStorageMapper();
     }
 
     @Provides
-    @Named("databaseName")
-    public String provideDatabaseName() {
-        return "meeckets";
-    }
-
-    @Provides
-    public MeecketsDatabaseDatasource provideMeecketsDatabaseDatasource(Context context,
-                                                                        @Named("database") Class<MeecketsDatabaseDatasource> database,
-                                                                        @Named("databaseName") String databaseName) {
-        return Room.databaseBuilder(context, database, databaseName).build();
+    public MeecketsDatabaseDatasource provideMeecketsDatabaseDatasource(Context context, StorageMapper<User> userStorageMapper) {
+        return new MeecketsDatabaseDatasource(context, userStorageMapper);
     }
 }

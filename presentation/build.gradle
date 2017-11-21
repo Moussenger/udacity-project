@@ -60,4 +60,7 @@ dependencies {
     compile deps.butterknife
     compile deps.lifecycleJava8
     compile deps.timber
+
+    testCompile deps.junit
+    androidTestImplementation deps.espresso
 }

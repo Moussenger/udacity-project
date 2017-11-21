@@ -35,14 +35,14 @@ dependencies {
     implementation project(':domain')
 
     annotationProcessor deps.lombok
-    annotationProcessor deps.roomCompiler
+    annotationProcessor deps.schematicCompiler
     compileOnly deps.lombok
     compile deps.javaxInject
     compile deps.appCompat
     compile deps.retrofit
     compile deps.retrofitConverterGson
     compile deps.gson
-    compile deps.roomRuntime
+    compile deps.schematic
     compile deps.rxJava
 
     testCompile deps.junit

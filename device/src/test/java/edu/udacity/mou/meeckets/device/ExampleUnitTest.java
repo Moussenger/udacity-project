@@ -2,6 +2,7 @@ package edu.udacity.mou.meeckets.device;
 
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 
 /**
