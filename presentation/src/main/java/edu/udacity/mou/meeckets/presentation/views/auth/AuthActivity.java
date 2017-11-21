@@ -7,12 +7,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import edu.udacity.mou.meeckets.presentation.R;
@@ -43,9 +40,6 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
 
     @BindView(R2.id.auth_loading_progress)
     ProgressBar authLoadingProgress;
-
-    @BindViews({R2.id.auth_logo_image, R2.id.auth_username_edit, R2.id.auth_password_edit, R2.id.auth_login_button})
-    List<View> viewsToAnimate;
 
     @Override
     public int layout() {
