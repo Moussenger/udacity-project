@@ -12,6 +12,7 @@ import edu.udacity.mou.meeckets.di.modules.AppModule;
 import edu.udacity.mou.meeckets.di.modules.data.RepositoriesModule;
 import edu.udacity.mou.meeckets.di.modules.data.datasources.DatabaseDatasourcesModule;
 import edu.udacity.mou.meeckets.di.modules.data.datasources.NetworkDatasourcesModule;
+import edu.udacity.mou.meeckets.di.modules.device.AccountsModule;
 import edu.udacity.mou.meeckets.di.modules.domain.InteractorsModule;
 import edu.udacity.mou.meeckets.di.modules.domain.SchedulersModule;
 import edu.udacity.mou.meeckets.di.modules.presentation.ActivityBuilderModule;
@@ -29,6 +30,7 @@ import edu.udacity.mou.meeckets.di.modules.presentation.ActivityBuilderModule;
         DatabaseDatasourcesModule.class,
         RepositoriesModule.class,
         ActivityBuilderModule.class,
+        AccountsModule.class,
         //FragmentBuilderModule.class
 })
 @Singleton

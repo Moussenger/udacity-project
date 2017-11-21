@@ -14,7 +14,7 @@ public class AuthViewModel extends MeecketsViewModel<AuthPresenter> {
     }
 
     public enum AuthErrorState {
-        NO_ERROR, INVALID_CREDENTIALS, GENERIC_ERROR
+        NO_ERROR, INVALID_CREDENTIALS, CREATE_ACCOUNT_ERROR, GENERIC_ERROR
     }
 
     private MutableLiveData<AuthState> authState = new MutableLiveData<>();
@@ -64,6 +64,11 @@ public class AuthViewModel extends MeecketsViewModel<AuthPresenter> {
 
     AuthViewModel invalidCredentials() {
         authErrorState.setValue(AuthErrorState.INVALID_CREDENTIALS);
+        return this;
+    }
+
+    AuthViewModel createAccountError() {
+        authErrorState.setValue(AuthErrorState.CREATE_ACCOUNT_ERROR);
         return this;
     }
 

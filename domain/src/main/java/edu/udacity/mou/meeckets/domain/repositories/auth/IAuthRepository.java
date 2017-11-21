@@ -2,7 +2,7 @@ package edu.udacity.mou.meeckets.domain.repositories.auth;
 
 
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
-import edu.udacity.mou.meeckets.domain.model.auth.Token;
+import edu.udacity.mou.meeckets.domain.model.auth.User;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
@@ -11,7 +11,7 @@ import io.reactivex.Observable;
  */
 
 public interface IAuthRepository {
-    Observable<Token> login(Login auth);
+    Observable<User> login(Login auth);
 
-    Completable saveToken(Token token);
+    Completable saveUser(User user);
 }

@@ -95,6 +95,9 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
             case INVALID_CREDENTIALS:
                 onInvalidCredentials();
                 break;
+            case CREATE_ACCOUNT_ERROR:
+                onCreateAccountError();
+                break;
             case GENERIC_ERROR:
                 onGenericError();
                 break;
@@ -122,6 +125,10 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
     private void onInvalidCredentials() {
         showMessage(getString(R.string.user_password_invalid));
         authUsernameEditText.requestFocus();
+    }
+
+    private void onCreateAccountError() {
+        showMessage(getString(R.string.create_account_error));
     }
 
     private void onGenericError() {

@@ -2,4 +2,5 @@
     <string name="app_name">presentation</string>
     <string name="user_password_invalid">Invalid user or password</string>
     <string name="generic_server_error">An error has happened. Please, try again.</string>
+    <string name="create_account_error">Error creating account</string>
 </resources>

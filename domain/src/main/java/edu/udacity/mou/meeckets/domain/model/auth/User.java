@@ -9,6 +9,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Token {
-    private String refreshToken;
+public class User {
+    private String username;
+    private String profileImage;
+    private String accessToken;
 }

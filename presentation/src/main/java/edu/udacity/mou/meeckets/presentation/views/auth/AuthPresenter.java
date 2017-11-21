@@ -4,7 +4,8 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
-import edu.udacity.mou.meeckets.domain.exceptions.InvalidCredentialsException;
+import edu.udacity.mou.meeckets.domain.exceptions.accounts.CreateAccountException;
+import edu.udacity.mou.meeckets.domain.exceptions.server.InvalidCredentialsException;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogin;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
 import edu.udacity.mou.meeckets.presentation.views.MeecketsPresenter;
@@ -60,6 +61,8 @@ public class AuthPresenter extends MeecketsPresenter<AuthActivity, AuthViewModel
 
         if (error instanceof InvalidCredentialsException) {
             getViewModel().invalidCredentials();
+        } else if (error instanceof CreateAccountException) {
+            getViewModel().createAccountError();
         } else {
             getViewModel().genericError();
         }

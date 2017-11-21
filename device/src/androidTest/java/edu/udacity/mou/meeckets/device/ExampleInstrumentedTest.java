@@ -1,4 +1,4 @@
-package edu.udacity.mou.meeckets.devices;
+package edu.udacity.mou.meeckets.device;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

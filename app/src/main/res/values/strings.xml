@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Meeckets</string>
+
+    <string name="account_type" translatable="false">edu.udacity.mou.meeckets</string>
+    <string name="token_name" translatable="false">access</string>
+    <string name="account_name" translatable="false">Meeckets</string>
 </resources>

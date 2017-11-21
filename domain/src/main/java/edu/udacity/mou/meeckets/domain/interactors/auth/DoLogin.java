@@ -2,9 +2,11 @@ package edu.udacity.mou.meeckets.domain.interactors.auth;
 
 import javax.inject.Inject;
 
+import edu.udacity.mou.meeckets.domain.device.IMeecketsAccountManager;
+import edu.udacity.mou.meeckets.domain.exceptions.accounts.CreateAccountException;
 import edu.udacity.mou.meeckets.domain.interactors.CompletableUseCase;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
-import edu.udacity.mou.meeckets.domain.model.auth.Token;
+import edu.udacity.mou.meeckets.domain.model.auth.User;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
 import io.reactivex.CompletableEmitter;
 import io.reactivex.Scheduler;
@@ -15,26 +17,33 @@ import io.reactivex.Scheduler;
 
 public class DoLogin extends CompletableUseCase<Login> {
     private IAuthRepository authRepository;
+    private IMeecketsAccountManager accountManager;
 
     @Inject
     public DoLogin(Scheduler backgroundThread, Scheduler mainThread,
-                   IAuthRepository authRepository) {
+                   IAuthRepository authRepository, IMeecketsAccountManager accountManager) {
         super(backgroundThread, mainThread);
         this.authRepository = authRepository;
+        this.accountManager = accountManager;
     }
 
     @Override
     protected void onRun(CompletableEmitter emitter, Login parameter) {
         authRepository.login(parameter).subscribe(
-                token -> onToken(emitter, token),
+                user -> onUser(emitter, user),
                 emitter::onError
         );
     }
 
-    private void onToken(CompletableEmitter emitter, Token token) {
-        System.out.println("TOKEN " + token.getRefreshToken());
+    private void onUser(CompletableEmitter emitter, User user) {
+        try {
+            accountManager.saveAccount(user.getAccessToken());
+        } catch (CreateAccountException e) {
+            emitter.onError(e);
+            return;
+        }
 
-        authRepository.saveToken(token).subscribe(
+        authRepository.saveUser(user).subscribe(
                 emitter::onComplete,
                 emitter::onError
         );

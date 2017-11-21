@@ -4,6 +4,7 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
+import edu.udacity.mou.meeckets.domain.device.IMeecketsAccountManager;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogin;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
 import io.reactivex.Scheduler;
@@ -16,8 +17,8 @@ import io.reactivex.Scheduler;
 public class InteractorsModule {
     @Provides
     DoLogin provideDoLogin(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
-                           IAuthRepository authRepository) {
-        return new DoLogin(backgroundThread, mainThread, authRepository);
+                           IAuthRepository authRepository, IMeecketsAccountManager accountManager) {
+        return new DoLogin(backgroundThread, mainThread, authRepository, accountManager);
     }
 
 }

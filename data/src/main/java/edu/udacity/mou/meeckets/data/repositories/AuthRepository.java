@@ -9,7 +9,7 @@ import edu.udacity.mou.meeckets.data.datasources.network.auth.IAuthNetworkDataso
 import edu.udacity.mou.meeckets.data.model.entities.AuthEntity;
 import edu.udacity.mou.meeckets.data.model.network.responses.AuthResponse;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
-import edu.udacity.mou.meeckets.domain.model.auth.Token;
+import edu.udacity.mou.meeckets.domain.model.auth.User;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
 import io.reactivex.Completable;
 import io.reactivex.CompletableEmitter;
@@ -33,29 +33,33 @@ public class AuthRepository implements IAuthRepository {
     }
 
     @Override
-    public Observable<Token> login(final Login auth) {
+    public Observable<User> login(final Login auth) {
         return Observable.create(emitter -> this.login(emitter, auth));
     }
 
     @Override
-    public Completable saveToken(final Token token) {
-        return Completable.create(emitter -> this.saveToken(emitter, token));
+    public Completable saveUser(final User user) {
+        return Completable.create(emitter -> this.saveUser(emitter, user));
     }
 
-    private void login(ObservableEmitter<Token> emitter, Login auth) {
+    private void login(ObservableEmitter<User> emitter, Login auth) {
         try {
             AuthResponse response = authNetworkDatasource.login(auth);
-            Token token = Token.builder().refreshToken(response.getRefreshToken()).build();
+            User user = User.builder()
+                    .username(response.getUsername())
+                    .profileImage(response.getProfileImage())
+                    .accessToken(response.getAccessToken())
+                    .build();
 
-            emitter.onNext(token);
+            emitter.onNext(user);
         } catch (Exception e) {
             emitter.onError(e);
         }
     }
 
-    private void saveToken(CompletableEmitter emitter, Token token) {
+    private void saveUser(CompletableEmitter emitter, User user) {
         try {
-            AuthEntity auth = AuthEntity.builder().token(token.getRefreshToken()).build();
+            AuthEntity auth = AuthEntity.builder().token(user.getAccessToken()).build();
             databaseDatasource.authDao().insert(auth);
             emitter.onComplete();
         } catch (Exception e) {

@@ -32,6 +32,5 @@ public class DatabaseDatasourcesModule {
                                                                         @Named("database") Class<MeecketsDatabaseDatasource> database,
                                                                         @Named("databaseName") String databaseName) {
         return Room.databaseBuilder(context, database, databaseName).build();
-
     }
 }

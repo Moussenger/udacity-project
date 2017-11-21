@@ -6,9 +6,9 @@ import javax.inject.Singleton;
 
 import edu.udacity.mou.meeckets.data.NetworkUtils;
 import edu.udacity.mou.meeckets.data.model.network.responses.AuthResponse;
-import edu.udacity.mou.meeckets.domain.exceptions.InternalServerErrorException;
-import edu.udacity.mou.meeckets.domain.exceptions.InvalidCredentialsException;
-import edu.udacity.mou.meeckets.domain.exceptions.ServerException;
+import edu.udacity.mou.meeckets.domain.exceptions.server.InternalServerErrorException;
+import edu.udacity.mou.meeckets.domain.exceptions.server.InvalidCredentialsException;
+import edu.udacity.mou.meeckets.domain.exceptions.server.ServerException;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
 
 /**
@@ -33,6 +33,10 @@ public class MockAuthNetworkDatasource implements IAuthNetworkDatasource {
             throw new InvalidCredentialsException();
         }
 
-        return AuthResponse.builder().refreshToken(UUID.randomUUID().toString()).build();
+        return AuthResponse.builder()
+                .username(USERNAME)
+                .profileImage("")
+                .accessToken(UUID.randomUUID().toString())
+                .build();
     }
 }
