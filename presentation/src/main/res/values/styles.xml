@@ -21,6 +21,13 @@
         <item name="android:layout_margin">@dimen/base_activity_margin</item>
     </style>
 
+    <style name="Meeckets.Base.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textSize">@dimen/base_toolbar_text_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
     <style name="Meeckets.Base.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="android:textColor">@color/meecketsGray</item>
     </style>

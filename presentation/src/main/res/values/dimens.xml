@@ -5,6 +5,8 @@
     <dimen name="base_text">16sp</dimen>
 
     <dimen name="base_activity_margin">@dimen/base_margin</dimen>
+    <dimen name="base_toolbar_elevation">4dp</dimen>
+    <dimen name="base_toolbar_text_size">20dp</dimen>
 
     <dimen name="auth_logo_size">150dp</dimen>
     <dimen name="auth_controls_size">@dimen/match_parent</dimen>
