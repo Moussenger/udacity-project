@@ -8,7 +8,7 @@ import io.reactivex.SingleEmitter;
  * Created by mou on 11/22/17.
  */
 
-public abstract class SingleUseCase<T extends Object, P> extends UseCase<P, Single<T>, SingleEmitter<T>> {
+public abstract class SingleUseCase<T, P> extends UseCase<P, Single<T>, SingleEmitter<T>> {
     public SingleUseCase(Scheduler backgroundThread, Scheduler mainThread) {
         super(backgroundThread, mainThread);
     }

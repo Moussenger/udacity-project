@@ -2,7 +2,7 @@ package edu.udacity.mou.meeckets.presentation.views.auth;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import edu.udacity.mou.meeckets.presentation.views.MeecketsViewModel;
+import edu.udacity.mou.meeckets.presentation.MeecketsViewModel;
 
 /**
  * Created by mou on 11/13/17.

@@ -49,17 +49,20 @@ dependencies {
     def deps = rootProject.ext
 
     implementation project(':domain')
+    implementation project(':data')
 
     annotationProcessor deps.butterknifeCompiler
     annotationProcessor deps.lifecycleCompiler
     compile deps.daggerAndroid
     compile deps.appCompat
+    compile deps.recyclerView
     compile deps.lifecycleExtensions
     compile deps.javaxInject
     compile deps.rxAndroid
     compile deps.butterknife
     compile deps.lifecycleJava8
     compile deps.timber
+    compile deps.picasso
 
     testCompile deps.junit
     androidTestImplementation deps.espresso

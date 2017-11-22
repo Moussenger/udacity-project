@@ -30,12 +30,14 @@ ext {
     timberVersion = '4.6.0'
     javaxInjectVersion = '1@jar'
     schematicVersion = '0.7.0'
+    picassoVersion = '2.5.2'
 
     junitVersion = '4.12'
     espressoVersion = '2.2.2'
 
     //Libraries
     appCompat = "com.android.support:appcompat-v7:${appCompatVersion}"
+    recyclerView = "com.android.support:recyclerview-v7:${appCompatVersion}"
     lifecycleJava8 = "android.arch.lifecycle:common-java8:${androidArchVersion}"
     lifecycleCompiler = "android.arch.lifecycle:compiler:${androidArchVersion}"
     lifecycleExtensions = "android.arch.lifecycle:extensions:${androidArchVersion}"
@@ -58,6 +60,7 @@ ext {
     butterknifeCompiler = "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
     timber = "com.jakewharton.timber:timber:${timberVersion}"
     javaxInject = "javax.inject:javax.inject:${javaxInjectVersion}"
+    picasso = "com.squareup.picasso:picasso:${picassoVersion}"
 
     junit = "com.android.support:appcompat-v7:${junitVersion}"
     espresso = "com.android.support.test.espresso:espresso-core:${espressoVersion}"

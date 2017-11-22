@@ -40,13 +40,34 @@
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/meecketsRed</item>
-        <item name="android:textSize">@dimen/base_text_mini</item>
+        <item name="android:textSize">@dimen/base_text_micro</item>
     </style>
 
     <style name="Meeckets.Widget.AuthEditText" parent="Meeckets.Base.AuthText">
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/meecketsWhiteSaver</item>
         <item name="android:textSize">@dimen/base_text</item>
+    </style>
+
+    <style name="Meeckets.Widget.DateTextLight" parent="">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/base_text_mini</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Meeckets.Widget.TitleTextLight" parent="">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/base_text_large</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Meeckets.Widget.PlaceTextLight" parent="">
+        <item name="android:fontFamily">@font/nunito_bold_italic</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/base_text_mini</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
 </resources>

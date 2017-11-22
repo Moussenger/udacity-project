@@ -5,6 +5,7 @@ import android.database.Cursor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,10 +29,6 @@ public abstract class StorageMapper<T> {
     }
 
     public T single(Cursor cursor) {
-        if (!cursor.moveToFirst()) {
-            return null;
-        }
-
         return fromCursor(cursor);
     }
 
@@ -49,6 +46,30 @@ public abstract class StorageMapper<T> {
 
     protected String getString(Cursor cursor, String name) {
         return cursor.getString(cursor.getColumnIndex(name));
+    }
+
+    protected Float getFloat(Cursor cursor, String name) {
+        return cursor.getFloat(cursor.getColumnIndex(name));
+    }
+
+    protected Long getLong(Cursor cursor, String name) {
+        return cursor.getLong(cursor.getColumnIndex(name));
+    }
+
+    protected Date getDate(Cursor cursor, String name) {
+        return convertDate(cursor.getLong(cursor.getColumnIndex(name)));
+    }
+
+    protected Long convertDate(Date date) {
+        return date == null ? null : date.getTime();
+    }
+
+    protected Date convertDate(Long millis) {
+        if (millis == null) {
+            return null;
+        }
+
+        return new Date(millis);
     }
 
     protected abstract ContentValues fromValues(T object);

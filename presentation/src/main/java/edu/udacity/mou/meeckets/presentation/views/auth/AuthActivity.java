@@ -1,5 +1,9 @@
 package edu.udacity.mou.meeckets.presentation.views.auth;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +18,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import edu.udacity.mou.meeckets.presentation.R;
 import edu.udacity.mou.meeckets.presentation.R2;
-import edu.udacity.mou.meeckets.presentation.views.MeecketsActivity;
+import edu.udacity.mou.meeckets.presentation.MeecketsActivity;
 
 /**
  * Created by mou on 11/11/17.
@@ -22,6 +26,13 @@ import edu.udacity.mou.meeckets.presentation.views.MeecketsActivity;
 
 public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel> {
     public static final String EMPTY = "";
+
+    public static void launchClear(Activity activity) {
+        Intent intent = new Intent(activity, AuthActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
+        activity.startActivity(intent, bundle);
+    }
 
     @Inject
     AuthPresenter presenter;
@@ -51,6 +62,11 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
         getViewModel().authState().observe(this, this::enableLoading);
         getViewModel().authErrorState().observe(this, this::manageError);
         getViewModel().loginEnabled().observe(this, this::enableLogin);
+    }
+
+    @Override
+    protected void setupWindowTransitions() {
+
     }
 
     @Override

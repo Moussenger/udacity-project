@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/base_item_height">
+
+    <ImageView
+        android:id="@+id/tournament_background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/smallworld_test" />
+
+    <include layout="@layout/layout_backgroundsaver" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/base_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tournament_name_text"
+            style="@style/Meeckets.Widget.TitleTextLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            tools:text="SmallWorld" />
+
+        <TextView
+            android:id="@+id/tournament_place_text"
+            style="@style/Meeckets.Widget.PlaceTextLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="at Dr Panush in A Coruña" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tournament_date_text"
+        style="@style/Meeckets.Widget.DateTextLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/base_margin"
+        tools:text="4 days left" />
+
+</FrameLayout>

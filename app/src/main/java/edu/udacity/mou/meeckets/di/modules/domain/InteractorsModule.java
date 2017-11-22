@@ -7,7 +7,9 @@ import dagger.Provides;
 import edu.udacity.mou.meeckets.domain.device.IMeecketsAccountManager;
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogin;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournaments;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
+import edu.udacity.mou.meeckets.domain.repositories.tournaments.ITournamentsRepository;
 import io.reactivex.Scheduler;
 
 /**
@@ -26,6 +28,12 @@ public class InteractorsModule {
     CheckLogin provideCheckLogin(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
                                  IMeecketsAccountManager accountManager) {
         return new CheckLogin(backgroundThread, mainThread, accountManager);
+    }
+
+    @Provides
+    GetTournaments provideGetTournaments(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                         ITournamentsRepository tournamentsRepository) {
+        return new GetTournaments(backgroundThread, mainThread, tournamentsRepository);
     }
 
 }

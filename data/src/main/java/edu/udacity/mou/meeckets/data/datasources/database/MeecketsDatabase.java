@@ -3,6 +3,7 @@ package edu.udacity.mou.meeckets.data.datasources.database;
 import net.simonvt.schematic.annotation.Database;
 import net.simonvt.schematic.annotation.Table;
 
+import edu.udacity.mou.meeckets.data.datasources.database.columns.TournamentColumns;
 import edu.udacity.mou.meeckets.data.datasources.database.columns.UserColumns;
 
 import static edu.udacity.mou.meeckets.data.datasources.database.MeecketsDatabase.VERSION;
@@ -17,4 +18,7 @@ public abstract class MeecketsDatabase {
 
     @Table(UserColumns.class)
     public static final String USERS = "users";
+
+    @Table(TournamentColumns.class)
+    public static final String TOURNAMENTS = "tournaments";
 }

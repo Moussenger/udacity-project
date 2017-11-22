@@ -1,41 +1,46 @@
 package edu.udacity.mou.meeckets.presentation.views.tournaments;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
-import android.widget.Toolbar;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import edu.udacity.mou.meeckets.presentation.MeecketsToolbarActivity;
 import edu.udacity.mou.meeckets.presentation.R;
 import edu.udacity.mou.meeckets.presentation.R2;
-import edu.udacity.mou.meeckets.presentation.views.MeecketsActivity;
+import edu.udacity.mou.meeckets.presentation.views.tournaments.adapters.TournamentsAdapter;
 
 /**
  * Created by mou on 11/21/17.
  */
 
-public class TournamentsActivity extends MeecketsActivity<TournamentsPresenter, TournamentsViewModel> {
-    public static void launch(Context context) {
-        context.startActivity(new Intent(context, TournamentsActivity.class));
-    }
-
-    public static void launchClear(Context context) {
-        Intent intent = new Intent(context, TournamentsActivity.class);
+public class TournamentsActivity extends MeecketsToolbarActivity<TournamentsPresenter, TournamentsViewModel> {
+    public static void launchClear(Activity activity) {
+        Intent intent = new Intent(activity, TournamentsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(intent);
+        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
+        activity.startActivity(intent, bundle);
     }
 
     @Inject
     TournamentsPresenter presenter;
 
-    @BindView(R2.id.tournaments_toolbar)
-    Toolbar toolbar;
+    @Inject
+    TournamentsAdapter adapter;
+
+    @BindView(R2.id.tournaments_list_recycler)
+    RecyclerView tournamentsRecyclerView;
 
     @Override
     protected void init() {
-        setActionBar(toolbar);
-        getActionBar().setTitle("");
+        configRecyclerView();
+        getViewModel().tournamentsCursor().observe(this, this::loadCursor);
     }
 
     @Override
@@ -56,5 +61,18 @@ public class TournamentsActivity extends MeecketsActivity<TournamentsPresenter, 
     @Override
     protected String getTag() {
         return TournamentsActivity.class.getSimpleName();
+    }
+
+    private void configRecyclerView() {
+        GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),
+                getResources().getInteger(R.integer.tournamentsSpanCount));
+
+        tournamentsRecyclerView.setHasFixedSize(true);
+        tournamentsRecyclerView.setLayoutManager(layoutManager);
+        tournamentsRecyclerView.setAdapter(adapter);
+    }
+
+    private void loadCursor(Cursor cursor) {
+        adapter.setCursor(cursor);
     }
 }

@@ -12,7 +12,7 @@ import edu.udacity.mou.meeckets.domain.exceptions.server.InvalidCredentialsExcep
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogin;
 import edu.udacity.mou.meeckets.domain.model.auth.Login;
-import edu.udacity.mou.meeckets.presentation.views.MeecketsPresenter;
+import edu.udacity.mou.meeckets.presentation.MeecketsPresenter;
 import edu.udacity.mou.meeckets.presentation.views.tournaments.TournamentsActivity;
 
 /**
@@ -25,6 +25,7 @@ public class AuthPresenter extends MeecketsPresenter<AuthActivity, AuthViewModel
 
     @Inject
     public AuthPresenter(DoLogin doLogin, CheckLogin checkLogin) {
+        super(checkLogin);
         this.doLogin = doLogin;
         this.checkLogin = checkLogin;
     }
@@ -57,10 +58,8 @@ public class AuthPresenter extends MeecketsPresenter<AuthActivity, AuthViewModel
     }
 
     private void launchTournamentsView() {
-        AuthActivity view = getView();
-
-        if (view != null) {
-            TournamentsActivity.launchClear(view.getApplicationContext());
+        if (isViewAttached()) {
+            TournamentsActivity.launchClear(getView());
         }
     }
 
