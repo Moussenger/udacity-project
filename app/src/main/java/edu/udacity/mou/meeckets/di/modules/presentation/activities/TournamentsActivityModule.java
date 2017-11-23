@@ -1,13 +1,12 @@
 package edu.udacity.mou.meeckets.di.modules.presentation.activities;
 
-import android.content.Context;
-
 import dagger.Module;
 import dagger.Provides;
 import edu.udacity.mou.meeckets.data.datasources.database.mappers.StorageMapper;
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournaments;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
+import edu.udacity.mou.meeckets.presentation.views.tournaments.TournamentsActivity;
 import edu.udacity.mou.meeckets.presentation.views.tournaments.TournamentsPresenter;
 import edu.udacity.mou.meeckets.presentation.views.tournaments.adapters.TournamentsAdapter;
 
@@ -23,7 +22,7 @@ public class TournamentsActivityModule {
     }
 
     @Provides
-    TournamentsAdapter provideTournamentsAdapter(Context context, StorageMapper<Tournament> tournamentStorageMapper) {
+    TournamentsAdapter provideTournamentsAdapter(TournamentsActivity context, StorageMapper<Tournament> tournamentStorageMapper) {
         return new TournamentsAdapter(context, tournamentStorageMapper);
     }
 }
