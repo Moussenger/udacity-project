@@ -13,8 +13,10 @@ import javax.inject.Inject;
 
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournaments;
+import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 import edu.udacity.mou.meeckets.presentation.MeecketsPresenter;
 import edu.udacity.mou.meeckets.presentation.views.auth.AuthActivity;
+import edu.udacity.mou.meeckets.presentation.views.tournament_details.TournamentDetailsActivity;
 import timber.log.Timber;
 
 /**
@@ -49,6 +51,21 @@ public class TournamentsPresenter extends MeecketsPresenter<TournamentsActivity,
     @Override
     public void onResume(@NonNull LifecycleOwner owner) {
         checkLogin.run(null).subscribe(this::onCheckLogin);
+    }
+
+    @Override
+    public void onDestroy(@NonNull LifecycleOwner owner) {
+        if (isViewAttached()) {
+            getView().removeListener();
+        }
+
+        super.onDestroy(owner);
+    }
+
+    public void onTournamentClicked(Tournament tournament) {
+        if (isViewAttached()) {
+            TournamentDetailsActivity.launch(getView(), tournament);
+        }
     }
 
     private void onCheckLogin(boolean logged) {

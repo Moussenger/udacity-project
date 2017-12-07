@@ -1,5 +1,6 @@
 package edu.udacity.mou.meeckets.domain.model.tournaments;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Builder;
@@ -11,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Tournament {
+public class Tournament implements Serializable {
     private long id;
     private String image;
     private String name;

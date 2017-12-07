@@ -17,6 +17,7 @@ public abstract class MeecketsBaseAdapter<T extends MeecketsViewHolder, M> exten
     private Context context;
     private Cursor cursor;
     private StorageMapper<M> mapper;
+    private IMeecketsListListener<M> listener;
 
     public MeecketsBaseAdapter(Context context, StorageMapper<M> mapper) {
         this.context = context;
@@ -33,6 +34,7 @@ public abstract class MeecketsBaseAdapter<T extends MeecketsViewHolder, M> exten
 
     @Override
     public void onBindViewHolder(T holder, int position) {
+        holder.setListener(listener);
         cursor.moveToPosition(position);
         holder.bind(context, cursor);
     }
@@ -47,6 +49,11 @@ public abstract class MeecketsBaseAdapter<T extends MeecketsViewHolder, M> exten
         notifyDataSetChanged();
     }
 
+    public void setListener(IMeecketsListListener<M> listener) {
+        this.listener = listener;
+        notifyDataSetChanged();
+    }
+
     protected StorageMapper<M> getMapper() {
         return mapper;
     }
@@ -54,5 +61,9 @@ public abstract class MeecketsBaseAdapter<T extends MeecketsViewHolder, M> exten
     public abstract int getLayout();
 
     public abstract T createViewHolder(View item);
+
+    public interface IMeecketsListListener<M> {
+        void onClick(M data);
+    }
 
 }

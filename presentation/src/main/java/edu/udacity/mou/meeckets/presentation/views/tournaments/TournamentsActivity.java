@@ -63,10 +63,15 @@ public class TournamentsActivity extends MeecketsToolbarActivity<TournamentsPres
         return TournamentsActivity.class.getSimpleName();
     }
 
+    public void removeListener() {
+        adapter.setListener(null);
+    }
+
     private void configRecyclerView() {
         GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),
                 getResources().getInteger(R.integer.tournamentsSpanCount));
 
+        adapter.setListener(getPresenter()::onTournamentClicked);
         tournamentsRecyclerView.setHasFixedSize(true);
         tournamentsRecyclerView.setLayoutManager(layoutManager);
         tournamentsRecyclerView.setAdapter(adapter);

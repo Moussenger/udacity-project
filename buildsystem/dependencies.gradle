@@ -37,6 +37,7 @@ ext {
 
     //Libraries
     appCompat = "com.android.support:appcompat-v7:${appCompatVersion}"
+    supportDesign = "com.android.support:design:${appCompatVersion}"
     recyclerView = "com.android.support:recyclerview-v7:${appCompatVersion}"
     lifecycleJava8 = "android.arch.lifecycle:common-java8:${androidArchVersion}"
     lifecycleCompiler = "android.arch.lifecycle:compiler:${androidArchVersion}"

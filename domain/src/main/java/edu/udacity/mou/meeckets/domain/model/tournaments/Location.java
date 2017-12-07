@@ -1,5 +1,7 @@
 package edu.udacity.mou.meeckets.domain.model.tournaments;
 
+import java.io.Serializable;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Location {
+public class Location implements Serializable {
     private String name;
     private float latitude;
     private float longitude;

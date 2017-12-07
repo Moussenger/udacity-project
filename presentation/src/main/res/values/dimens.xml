@@ -8,6 +8,7 @@
 
     <dimen name="base_activity_margin">@dimen/base_margin</dimen>
     <dimen name="base_toolbar_elevation">4dp</dimen>
+    <dimen name="base_item_elevation">2dp</dimen>
     <dimen name="base_toolbar_text_size">20dp</dimen>
     <dimen name="base_item_height">230dp</dimen>
 

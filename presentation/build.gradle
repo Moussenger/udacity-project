@@ -55,6 +55,7 @@ dependencies {
     annotationProcessor deps.lifecycleCompiler
     compile deps.daggerAndroid
     compile deps.appCompat
+    compile deps.supportDesign
     compile deps.recyclerView
     compile deps.lifecycleExtensions
     compile deps.javaxInject

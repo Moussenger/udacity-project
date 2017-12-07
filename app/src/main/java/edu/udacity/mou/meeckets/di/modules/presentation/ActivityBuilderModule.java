@@ -3,8 +3,10 @@ package edu.udacity.mou.meeckets.di.modules.presentation;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import edu.udacity.mou.meeckets.di.modules.presentation.activities.AuthActivityModule;
+import edu.udacity.mou.meeckets.di.modules.presentation.activities.TournamentDetailsActivityModule;
 import edu.udacity.mou.meeckets.di.modules.presentation.activities.TournamentsActivityModule;
 import edu.udacity.mou.meeckets.presentation.views.auth.AuthActivity;
+import edu.udacity.mou.meeckets.presentation.views.tournament_details.TournamentDetailsActivity;
 import edu.udacity.mou.meeckets.presentation.views.tournaments.TournamentsActivity;
 
 /**
@@ -18,4 +20,7 @@ public interface ActivityBuilderModule {
 
     @ContributesAndroidInjector(modules = TournamentsActivityModule.class)
     TournamentsActivity bindTournamentsActivity();
+
+    @ContributesAndroidInjector(modules = TournamentDetailsActivityModule.class)
+    TournamentDetailsActivity bindTournamentDetailsActivity();
 }

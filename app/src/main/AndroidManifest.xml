@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Meeckets.Theme">
+
         <activity android:name=".presentation.views.tournaments.TournamentsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +21,8 @@
         <activity
             android:name=".presentation.views.auth.AuthActivity"
             android:theme="@style/Meeckets.Theme.Dark" />
+
+        <activity android:name=".presentation.views.tournament_details.TournamentDetailsActivity" />
 
         <service android:name="edu.udacity.mou.meeckets.device.accounts.AuthenticationService">
             <intent-filter>

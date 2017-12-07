@@ -37,16 +37,16 @@ public class TournamentsViewHolder extends MeecketsViewHolder<Tournament> {
 
     @Override
     public void bind(Context context, Cursor cursor) {
-        Tournament tournament = getMapper().single(cursor);
+        setItem(getMapper().single(cursor));
 
         Picasso.with(context)
-                .load(tournament.getImage())
+                .load(getItem().getImage())
                 .resize(600, 400)
                 .centerCrop()
                 .into(tournamentBackgroundImage);
 
-        tournamentNameText.setText(tournament.getName());
-        tournamentPlaceText.setText(tournament.getLocation().getName());
+        tournamentNameText.setText(getItem().getName());
+        tournamentPlaceText.setText(getItem().getLocation().getName());
     }
 
 }
