@@ -31,6 +31,7 @@ ext {
     javaxInjectVersion = '1@jar'
     schematicVersion = '0.7.0'
     picassoVersion = '2.5.2'
+    googleMapsVersion = '11.6.2'
 
     junitVersion = '4.12'
     espressoVersion = '2.2.2'
@@ -62,6 +63,7 @@ ext {
     timber = "com.jakewharton.timber:timber:${timberVersion}"
     javaxInject = "javax.inject:javax.inject:${javaxInjectVersion}"
     picasso = "com.squareup.picasso:picasso:${picassoVersion}"
+    googleMaps = "com.google.android.gms:play-services-maps:${googleMapsVersion}"
 
     junit = "com.android.support:appcompat-v7:${junitVersion}"
     espresso = "com.android.support.test.espresso:espresso-core:${espressoVersion}"

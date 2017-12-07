@@ -4,6 +4,15 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Transition;
+import android.transition.TransitionManager;
+import android.util.ArrayMap;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
@@ -40,7 +49,36 @@ public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends M
     protected void onDestroy() {
         getPresenter().detachLifecycle(getLifecycle());
         getPresenter().detachView();
+        removeActivityFromTransitionManager();
         super.onDestroy();
+    }
+
+    /**
+     * Remove memory leaks for Lollipop transitions
+     */
+    private void removeActivityFromTransitionManager() {
+        Class transitionManagerClass = TransitionManager.class;
+
+        try {
+            Field runningTransitionsField = transitionManagerClass.getDeclaredField("sRunningTransitions");
+            runningTransitionsField.setAccessible(true);
+
+            ThreadLocal<WeakReference<ArrayMap<ViewGroup, ArrayList<Transition>>>> runningTransitions =
+                    (ThreadLocal<WeakReference<ArrayMap<ViewGroup, ArrayList<Transition>>>>) runningTransitionsField.get(transitionManagerClass);
+
+            if (runningTransitions.get() != null && runningTransitions.get().get() != null) {
+                ArrayMap map = runningTransitions.get().get();
+                View decorView = getWindow().getDecorView();
+
+                if (map.containsKey(decorView)) {
+                    map.remove(decorView);
+                }
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void loadViewModel() {

@@ -7,6 +7,12 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -45,6 +51,8 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
     protected void init() {
         super.init();
         enableBackButton();
+        loadMap();
+        getViewModel().googleMap().observe(this, this::onMapLoaded);
         getViewModel().tournament().observe(this, this::onTournamentAdded);
     }
 
@@ -68,6 +76,11 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
         return TournamentDetailsActivity.class.getSimpleName();
     }
 
+    protected void loadMap() {
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.tournament_map_maps);
+        mapFragment.getMapAsync(getPresenter()::onMapLoaded);
+    }
+
     protected void onTournamentAdded(Tournament tournament) {
         if (tournament != null) {
             setToolbarTitle(tournament.getName());
@@ -78,6 +91,28 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
                     .resize(600, 400)
                     .centerCrop()
                     .into(pictureImageView);
+
+            drawLocation(tournament, getViewModel().googleMap().getValue());
+        }
+    }
+
+    protected synchronized void onMapLoaded(GoogleMap googleMap) {
+        drawLocation(getViewModel().tournament().getValue(), googleMap);
+    }
+
+    protected void drawLocation(Tournament tournament, GoogleMap googleMap) {
+        if (tournament != null && googleMap != null) {
+            LatLng location = new LatLng(tournament.getLocation().getLatitude(), tournament.getLocation().getLongitude());
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(location)
+                    .zoom(15)
+                    .bearing(0)
+                    .tilt(45)
+                    .build();
+
+            googleMap.clear();
+            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            googleMap.addMarker(new MarkerOptions().position(location).title(tournament.getLocation().getName()));
         }
     }
 }

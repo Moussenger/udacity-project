@@ -2,4 +2,6 @@
 <resources>
     <integer name="auth_layout_orientation">0</integer> <!-- 0 = horizontal -->
     <integer name="tournamentsSpanCount">2</integer>
+
+    <dimen name="tournamentDetailPaddingTop">0dp</dimen>
 </resources>

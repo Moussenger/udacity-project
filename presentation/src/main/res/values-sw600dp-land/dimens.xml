@@ -2,4 +2,7 @@
 <resources>
     <integer name="auth_controls_gravity">@integer/center</integer>
     <integer name="tournamentsSpanCount">3</integer>
+
+    <dimen name="tournamentDetailPaddingTop">200dp</dimen>
+    <dimen name="tournamentDetailHorizontalMargin">100dp</dimen>
 </resources>

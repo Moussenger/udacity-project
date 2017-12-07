@@ -4,6 +4,8 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import javax.inject.Inject;
 
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
@@ -47,5 +49,13 @@ public class TournamentDetailsPresenter extends MeecketsPresenter<TournamentDeta
         if (isViewAttached() && !logged) {
             AuthActivity.launchClear(getView());
         }
+    }
+
+    public void onMapLoaded(GoogleMap googleMap) {
+        googleMap.getUiSettings().setAllGesturesEnabled(false);
+        googleMap.getUiSettings().setZoomControlsEnabled(false);
+        googleMap.getUiSettings().setCompassEnabled(false);
+
+        getViewModel().googleMap(googleMap);
     }
 }

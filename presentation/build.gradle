@@ -64,6 +64,7 @@ dependencies {
     compile deps.lifecycleJava8
     compile deps.timber
     compile deps.picasso
+    compile deps.googleMaps
 
     testCompile deps.junit
     androidTestImplementation deps.espresso
