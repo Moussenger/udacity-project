@@ -15,7 +15,6 @@ import edu.udacity.mou.meeckets.presentation.R;
 /**
  * Created by mou on 11/22/17.
  */
-
 public class TournamentsAdapter extends MeecketsBaseAdapter<TournamentsViewHolder, Tournament> {
     private UpdateTournamentsLocation updateTournamentsLocation;
 

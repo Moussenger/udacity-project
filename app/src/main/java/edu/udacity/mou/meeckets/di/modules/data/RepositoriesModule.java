@@ -6,8 +6,10 @@ import edu.udacity.mou.meeckets.data.datasources.database.MeecketsDatabaseDataso
 import edu.udacity.mou.meeckets.data.datasources.network.auth.IAuthNetworkDatasource;
 import edu.udacity.mou.meeckets.data.datasources.network.tournaments.ITournamentsNetworkDatasource;
 import edu.udacity.mou.meeckets.data.repositories.AuthRepository;
+import edu.udacity.mou.meeckets.data.repositories.SubscriptionsRepository;
 import edu.udacity.mou.meeckets.data.repositories.TournamentRepository;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
+import edu.udacity.mou.meeckets.domain.repositories.tournaments.ISubscriptionsRepository;
 import edu.udacity.mou.meeckets.domain.repositories.tournaments.ITournamentsRepository;
 
 /**
@@ -26,5 +28,10 @@ public class RepositoriesModule {
     public ITournamentsRepository provideTournamentRepository(ITournamentsNetworkDatasource tournamentsNetworkDatasource,
                                                               MeecketsDatabaseDatasource databaseDatasource) {
         return new TournamentRepository(tournamentsNetworkDatasource, databaseDatasource);
+    }
+
+    @Provides
+    public ISubscriptionsRepository provideSubscriptionRepository(MeecketsDatabaseDatasource databaseDatasource) {
+        return new SubscriptionsRepository(databaseDatasource);
     }
 }

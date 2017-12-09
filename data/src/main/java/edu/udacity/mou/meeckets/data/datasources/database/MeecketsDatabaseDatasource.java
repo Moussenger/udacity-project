@@ -2,6 +2,7 @@ package edu.udacity.mou.meeckets.data.datasources.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.inject.Singleton;
 import edu.udacity.mou.meeckets.data.datasources.database.mappers.StorageMapper;
 import edu.udacity.mou.meeckets.domain.exceptions.database.InsertException;
 import edu.udacity.mou.meeckets.domain.model.auth.User;
+import edu.udacity.mou.meeckets.domain.model.tournaments.Subscription;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 
 /**
@@ -23,13 +25,16 @@ public class MeecketsDatabaseDatasource implements IMeecketsDatabaseDatasource {
     private Context context;
     private StorageMapper<User> userStorageMapper;
     private StorageMapper<Tournament> tournamentStorageMapper;
+    private StorageMapper<Subscription> subscriptionStorageMapper;
 
     @Inject
     public MeecketsDatabaseDatasource(Context context, StorageMapper<User> userStorageMapper,
-                                      StorageMapper<Tournament> tournamentStorageMapper) {
+                                      StorageMapper<Tournament> tournamentStorageMapper,
+                                      StorageMapper<Subscription> subscriptionStorageMapper) {
         this.context = context;
         this.userStorageMapper = userStorageMapper;
         this.tournamentStorageMapper = tournamentStorageMapper;
+        this.subscriptionStorageMapper = subscriptionStorageMapper;
     }
 
     @Override
@@ -57,5 +62,36 @@ public class MeecketsDatabaseDatasource implements IMeecketsDatabaseDatasource {
         ContentValues[] contentValues = tournamentStorageMapper.values(tournaments);
 
         context.getContentResolver().bulkInsert(MeecketsProvider.Tournaments.CONTENT_URI, contentValues);
+    }
+
+    @Override
+    public void addSubscription(Subscription subscription) {
+        ContentValues contentValues = subscriptionStorageMapper.values(subscription);
+
+        context.getContentResolver().insert(MeecketsProvider.Subscriptions.CONTENT_URI, contentValues);
+    }
+
+    @Override
+    public Uri getSubscriptions() {
+        return MeecketsProvider.Subscriptions.CONTENT_URI;
+    }
+
+    @Override
+    public Subscription getSubscription(long id) {
+        Cursor cursor = context.getContentResolver().query(MeecketsProvider.Subscriptions.CONTENT_URI, null, "id=?", new String[]{String.valueOf(id)}, null);
+        Subscription subscription = subscriptionStorageMapper.single(cursor);
+        cursor.close();
+
+        return subscription;
+    }
+
+    @Override
+    public void deleteSubscription(long id) {
+        context.getContentResolver().delete(MeecketsProvider.Subscriptions.CONTENT_URI, "id=?", new String[]{String.valueOf(id)});
+    }
+
+    @Override
+    public void deleteSubscriptions() {
+        context.getContentResolver().delete(MeecketsProvider.Subscriptions.CONTENT_URI, null, null);
     }
 }

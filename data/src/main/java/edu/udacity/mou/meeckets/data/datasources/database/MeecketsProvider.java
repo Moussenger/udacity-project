@@ -22,6 +22,7 @@ public class MeecketsProvider {
     interface Path {
         String USERS = "users";
         String TOURNAMENTS = "tournaments";
+        String SUBSCRIPTIONS = "subscriptions";
     }
 
     private static Uri buildUri(String... paths) {
@@ -44,5 +45,11 @@ public class MeecketsProvider {
     public static class Tournaments {
         @ContentUri(path = Path.TOURNAMENTS, type = DIR_TYPE + "tournament")
         public static Uri CONTENT_URI = buildUri(Path.TOURNAMENTS);
+    }
+
+    @TableEndpoint(table = MeecketsDatabase.SUBSCRIPTIONS)
+    public static class Subscriptions {
+        @ContentUri(path = Path.SUBSCRIPTIONS, type = DIR_TYPE + "subscription")
+        public static Uri CONTENT_URI = buildUri(Path.SUBSCRIPTIONS);
     }
 }

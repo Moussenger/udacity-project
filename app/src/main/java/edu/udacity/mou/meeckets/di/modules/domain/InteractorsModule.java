@@ -9,9 +9,15 @@ import edu.udacity.mou.meeckets.domain.device.IMeecketsLocationProvider;
 import edu.udacity.mou.meeckets.domain.device.IMeecketsPermissionChecker;
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogin;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.AddSubscription;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.DeleteSubscription;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.DeleteSubscriptions;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetSubscription;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetSubscriptions;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournaments;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.UpdateTournamentsLocation;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
+import edu.udacity.mou.meeckets.domain.repositories.tournaments.ISubscriptionsRepository;
 import edu.udacity.mou.meeckets.domain.repositories.tournaments.ITournamentsRepository;
 import io.reactivex.Scheduler;
 
@@ -40,9 +46,39 @@ public class InteractorsModule {
     }
 
     @Provides
-    UpdateTournamentsLocation providerUpdateTournamentsLocation(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
-                                                                IMeecketsPermissionChecker permissionChecker, IMeecketsLocationProvider locationProvider) {
+    UpdateTournamentsLocation provideUpdateTournamentsLocation(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                                               IMeecketsPermissionChecker permissionChecker, IMeecketsLocationProvider locationProvider) {
         return new UpdateTournamentsLocation(backgroundThread, mainThread, locationProvider, permissionChecker);
+    }
+
+    @Provides
+    AddSubscription provideAddSubscription(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                           ISubscriptionsRepository subscriptionsRepository) {
+        return new AddSubscription(backgroundThread, mainThread, subscriptionsRepository);
+    }
+
+    @Provides
+    DeleteSubscription provideDeleteSubscription(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                                 ISubscriptionsRepository subscriptionsRepository) {
+        return new DeleteSubscription(backgroundThread, mainThread, subscriptionsRepository);
+    }
+
+    @Provides
+    DeleteSubscriptions provideDeleteSubscriptions(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                                   ISubscriptionsRepository subscriptionsRepository) {
+        return new DeleteSubscriptions(backgroundThread, mainThread, subscriptionsRepository);
+    }
+
+    @Provides
+    GetSubscription provideGetSubscription(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                           ISubscriptionsRepository subscriptionsRepository) {
+        return new GetSubscription(backgroundThread, mainThread, subscriptionsRepository);
+    }
+
+    @Provides
+    GetSubscriptions provideGetSubscriptions(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                             ISubscriptionsRepository subscriptionsRepository) {
+        return new GetSubscriptions(backgroundThread, mainThread, subscriptionsRepository);
     }
 
 }

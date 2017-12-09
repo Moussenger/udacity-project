@@ -6,6 +6,7 @@ import java.util.List;
 
 import edu.udacity.mou.meeckets.domain.exceptions.database.InsertException;
 import edu.udacity.mou.meeckets.domain.model.auth.User;
+import edu.udacity.mou.meeckets.domain.model.tournaments.Subscription;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 
 /**
@@ -20,5 +21,15 @@ public interface IMeecketsDatabaseDatasource {
     Uri getTournaments();
 
     void saveTournaments(List<Tournament> tournaments);
+
+    void addSubscription(Subscription subscription);
+
+    Uri getSubscriptions();
+
+    Subscription getSubscription(long id);
+
+    void deleteSubscription(long id);
+
+    void deleteSubscriptions();
 
 }

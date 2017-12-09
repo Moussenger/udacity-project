@@ -27,6 +27,8 @@
 
             <include layout="@layout/layout_tournament_details" />
 
+            <include layout="@layout/layout_subscription_button" />
+
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

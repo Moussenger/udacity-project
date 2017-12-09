@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.google.android.gms.maps.GoogleMap;
 
+import edu.udacity.mou.meeckets.domain.model.tournaments.Subscription;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 import edu.udacity.mou.meeckets.presentation.MeecketsViewModel;
 
@@ -13,10 +14,15 @@ import edu.udacity.mou.meeckets.presentation.MeecketsViewModel;
 
 public class TournamentDetailsViewModel extends MeecketsViewModel<TournamentDetailsPresenter> {
     private MutableLiveData<Tournament> tournament = new MutableLiveData<>();
+    private MutableLiveData<Subscription> subscription = new MutableLiveData<>();
     private MutableLiveData<GoogleMap> googleMap = new MutableLiveData<>();
 
     MutableLiveData<Tournament> tournament() {
         return tournament;
+    }
+
+    MutableLiveData<Subscription> subscription() {
+        return subscription;
     }
 
     MutableLiveData<GoogleMap> googleMap() {
@@ -25,6 +31,11 @@ public class TournamentDetailsViewModel extends MeecketsViewModel<TournamentDeta
 
     TournamentDetailsViewModel tournament(Tournament newTournament) {
         tournament.setValue(newTournament);
+        return this;
+    }
+
+    TournamentDetailsViewModel subscription(Subscription newSubscription) {
+        subscription.setValue(newSubscription);
         return this;
     }
 

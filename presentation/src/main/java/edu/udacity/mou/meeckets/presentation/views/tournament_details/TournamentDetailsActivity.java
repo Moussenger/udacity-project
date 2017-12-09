@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,8 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import edu.udacity.mou.meeckets.domain.model.tournaments.Subscription;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 import edu.udacity.mou.meeckets.presentation.MeecketsToolbarActivity;
 import edu.udacity.mou.meeckets.presentation.R;
@@ -51,6 +55,9 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
     @BindView(R2.id.tournament_date_text)
     TextView dateTextView;
 
+    @BindView(R2.id.tournament_subscription_button)
+    FloatingActionButton subscriptionButton;
+
     @Inject
     TournamentDetailsPresenter presenter;
 
@@ -61,6 +68,7 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
         loadMap();
         getViewModel().googleMap().observe(this, this::onMapLoaded);
         getViewModel().tournament().observe(this, this::onTournamentAdded);
+        getViewModel().subscription().observe(this, this::onSubscriptionChanged);
     }
 
     @Override
@@ -105,6 +113,14 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
         }
     }
 
+    protected void onSubscriptionChanged(Subscription subscription) {
+        if (subscription == null) {
+            subscriptionButton.setImageResource(R.drawable.ic_add_black_24dp);
+        } else {
+            subscriptionButton.setImageResource(R.drawable.ic_clear_black_24dp);
+        }
+    }
+
     protected synchronized void onMapLoaded(GoogleMap googleMap) {
         drawLocation(getViewModel().tournament().getValue(), googleMap);
     }
@@ -123,5 +139,10 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             googleMap.addMarker(new MarkerOptions().position(location).title(tournament.getLocation().getName()));
         }
+    }
+
+    @OnClick(R2.id.tournament_subscription_button)
+    protected void onSubscriptionClick(View view) {
+        getPresenter().onSubscriptionClick();
     }
 }

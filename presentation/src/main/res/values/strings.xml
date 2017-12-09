@@ -7,6 +7,10 @@
     <string name="distance_meters">%d m</string>
     <string name="distance_kilometers">%d km</string>
 
+    <string name="error_adding_subscription">Error adding subscription</string>
+    <string name="error_deleting_subscription">Error deleting subscription</string>
+    <string name="error_loading_subscription">Error loading subscription</string>
+
     <string name="date_relative_less_minute">Less than a minute</string>
     <plurals name="date_relative_minutes">
         <item quantity="one">%d minute left</item>

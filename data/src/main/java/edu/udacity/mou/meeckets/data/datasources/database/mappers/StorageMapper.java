@@ -29,7 +29,11 @@ public abstract class StorageMapper<T> {
     }
 
     public T single(Cursor cursor) {
-        return fromCursor(cursor);
+        if (cursor.moveToFirst()) {
+            return fromCursor(cursor);
+        } else {
+            return null;
+        }
     }
 
     public List<T> all(Cursor cursor) {
