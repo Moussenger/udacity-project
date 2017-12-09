@@ -3,4 +3,29 @@
     <string name="user_password_invalid">Invalid user or password</string>
     <string name="generic_server_error">An error has happened. Please, try again.</string>
     <string name="create_account_error">Error creating account</string>
+
+    <string name="distance_meters">%d m</string>
+    <string name="distance_kilometers">%d km</string>
+
+    <string name="date_relative_less_minute">Less than a minute</string>
+    <plurals name="date_relative_minutes">
+        <item quantity="one">%d minute left</item>
+        <item quantity="other">%d minutes left</item>
+    </plurals>
+    <plurals name="date_relative_hours">
+        <item quantity="one">%d hour left</item>
+        <item quantity="other">%d hours left</item>
+    </plurals>
+    <plurals name="date_relative_days">
+        <item quantity="one">%d day left</item>
+        <item quantity="other">%d days left</item>
+    </plurals>
+    <plurals name="date_relative_weeks">
+        <item quantity="one">%d week left</item>
+        <item quantity="other">%d weeks left</item>
+    </plurals>
+    <plurals name="date_relative_months">
+        <item quantity="one">%d month left</item>
+        <item quantity="other">%d months left</item>
+    </plurals>
 </resources>

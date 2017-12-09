@@ -7,7 +7,7 @@ import javax.inject.Named;
 import dagger.Module;
 import dagger.Provides;
 import edu.udacity.mou.meeckets.R;
-import edu.udacity.mou.meeckets.device.accounts.MeecketsAccountManager;
+import edu.udacity.mou.meeckets.device.accounts.accounts.MeecketsAccountManager;
 import edu.udacity.mou.meeckets.domain.device.IMeecketsAccountManager;
 
 /**

@@ -7,21 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Collections;
+import java.util.List;
+
 import edu.udacity.mou.meeckets.data.datasources.database.mappers.StorageMapper;
 
 /**
  * Created by mou on 11/22/17.
  */
 
-public abstract class MeecketsBaseAdapter<T extends MeecketsViewHolder, M> extends RecyclerView.Adapter<T> {
+public abstract class MeecketsBaseAdapter<T extends MeecketsViewHolder, M extends Comparable<M>> extends RecyclerView.Adapter<T> {
     private Context context;
-    private Cursor cursor;
+    private List<M> items;
     private StorageMapper<M> mapper;
     private IMeecketsListListener<M> listener;
 
     public MeecketsBaseAdapter(Context context, StorageMapper<M> mapper) {
         this.context = context;
-        cursor = null;
         this.mapper = mapper;
     }
 
@@ -35,17 +37,18 @@ public abstract class MeecketsBaseAdapter<T extends MeecketsViewHolder, M> exten
     @Override
     public void onBindViewHolder(T holder, int position) {
         holder.setListener(listener);
-        cursor.moveToPosition(position);
-        holder.bind(context, cursor);
+        holder.bind(context, items.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return cursor == null ? 0 : cursor.getCount();
+        return items == null ? 0 : items.size();
     }
 
     public void setCursor(Cursor cursor) {
-        this.cursor = cursor;
+        items = getMapper().all(cursor);
+        onNewItems(items);
+        Collections.sort(items);
         notifyDataSetChanged();
     }
 
@@ -57,6 +60,12 @@ public abstract class MeecketsBaseAdapter<T extends MeecketsViewHolder, M> exten
     protected StorageMapper<M> getMapper() {
         return mapper;
     }
+
+    protected List<M> getItems() {
+        return this.items;
+    }
+
+    public abstract void onNewItems(List<M> items);
 
     public abstract int getLayout();
 

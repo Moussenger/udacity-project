@@ -22,6 +22,7 @@ import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 import edu.udacity.mou.meeckets.presentation.MeecketsToolbarActivity;
 import edu.udacity.mou.meeckets.presentation.R;
 import edu.udacity.mou.meeckets.presentation.R2;
+import edu.udacity.mou.meeckets.presentation.utils.DateUtils;
 
 /**
  * Created by mou on 11/21/17.
@@ -43,6 +44,12 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
 
     @BindView(R2.id.tournament_picture_image)
     ImageView pictureImageView;
+
+    @BindView(R2.id.tournament_location_text)
+    TextView locationTextView;
+
+    @BindView(R2.id.tournament_date_text)
+    TextView dateTextView;
 
     @Inject
     TournamentDetailsPresenter presenter;
@@ -85,6 +92,8 @@ public class TournamentDetailsActivity extends MeecketsToolbarActivity<Tournamen
         if (tournament != null) {
             setToolbarTitle(tournament.getName());
             descriptionTextView.setText(tournament.getDescription());
+            locationTextView.setText(tournament.getLocation().getName());
+            dateTextView.setText(DateUtils.parseDate(tournament.getDate()));
 
             Picasso.with(this)
                     .load(tournament.getImage())

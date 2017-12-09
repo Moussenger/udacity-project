@@ -16,9 +16,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import edu.udacity.mou.meeckets.presentation.MeecketsActivity;
 import edu.udacity.mou.meeckets.presentation.R;
 import edu.udacity.mou.meeckets.presentation.R2;
-import edu.udacity.mou.meeckets.presentation.MeecketsActivity;
 
 /**
  * Created by mou on 11/11/17.
@@ -82,6 +82,11 @@ public class AuthActivity extends MeecketsActivity<AuthPresenter, AuthViewModel>
     @Override
     protected String getTag() {
         return getClass().getSimpleName();
+    }
+
+    @Override
+    protected void onLocationPermissionResponse(boolean granted) {
+        presenter.onLocationPermissionResponse();
     }
 
     private void showMessage(String token) {

@@ -5,6 +5,7 @@ import dagger.Provides;
 import edu.udacity.mou.meeckets.data.datasources.database.mappers.StorageMapper;
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournaments;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.UpdateTournamentsLocation;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 import edu.udacity.mou.meeckets.presentation.views.tournaments.TournamentsActivity;
 import edu.udacity.mou.meeckets.presentation.views.tournaments.TournamentsPresenter;
@@ -22,7 +23,8 @@ public class TournamentsActivityModule {
     }
 
     @Provides
-    TournamentsAdapter provideTournamentsAdapter(TournamentsActivity context, StorageMapper<Tournament> tournamentStorageMapper) {
-        return new TournamentsAdapter(context, tournamentStorageMapper);
+    TournamentsAdapter provideTournamentsAdapter(TournamentsActivity context, StorageMapper<Tournament> tournamentStorageMapper,
+                                                 UpdateTournamentsLocation updateTournamentsLocation) {
+        return new TournamentsAdapter(context, tournamentStorageMapper, updateTournamentsLocation);
     }
 }

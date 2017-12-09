@@ -46,6 +46,10 @@ public class AuthPresenter extends MeecketsPresenter<AuthActivity, AuthViewModel
     }
 
     public void onLoginClick() {
+        getView().requestLocationPermission();
+    }
+
+    public void onLocationPermissionResponse() {
         getViewModel().loading();
         getViewModel().noError();
 

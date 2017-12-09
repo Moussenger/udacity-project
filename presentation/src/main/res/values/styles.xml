@@ -56,6 +56,13 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="Meeckets.Widget.DateText" parent="">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textColor">@color/meecketsGrayLight</item>
+        <item name="android:textSize">@dimen/base_text_mini</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="Meeckets.Widget.TitleTextLight" parent="">
         <item name="android:fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">@color/white</item>
@@ -68,6 +75,15 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/base_text_mini</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Meeckets.Widget.DistanceTextLight" parent="">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textColor">@color/meecketsYellow</item>
+        <item name="android:textSize">@dimen/base_text_mini</item>
+        <item name="android:drawableStart">@drawable/ic_near_me_black_24dp</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:drawablePadding">@dimen/base_margin_mini</item>
     </style>
 
 </resources>

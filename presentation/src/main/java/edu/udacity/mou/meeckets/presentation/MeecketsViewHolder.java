@@ -1,7 +1,6 @@
 package edu.udacity.mou.meeckets.presentation;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -44,5 +43,5 @@ public abstract class MeecketsViewHolder<T> extends RecyclerView.ViewHolder {
         this.item = item;
     }
 
-    public abstract void bind(Context context, Cursor cursor);
+    public abstract void bind(Context context, T item);
 }

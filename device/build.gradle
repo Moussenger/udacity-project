@@ -36,6 +36,7 @@ dependencies {
 
     compile deps.javaxInject
     compile deps.appCompat
+    compile deps.location
 
     testCompile deps.junit
     androidTestImplementation deps.espresso

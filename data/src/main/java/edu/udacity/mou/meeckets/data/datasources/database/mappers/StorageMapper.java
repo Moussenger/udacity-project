@@ -35,7 +35,7 @@ public abstract class StorageMapper<T> {
     public List<T> all(Cursor cursor) {
         ArrayList<T> data = new ArrayList<>();
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 data.add(fromCursor(cursor));
             } while (cursor.moveToNext());

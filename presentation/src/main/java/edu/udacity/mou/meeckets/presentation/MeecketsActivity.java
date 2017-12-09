@@ -1,8 +1,12 @@
 package edu.udacity.mou.meeckets.presentation;
 
+import android.Manifest;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Transition;
 import android.transition.TransitionManager;
@@ -22,6 +26,8 @@ import dagger.android.AndroidInjection;
  */
 
 public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends MeecketsViewModel<P>> extends AppCompatActivity {
+    private static final int REQUEST_LOCATION = 1;
+
     private VM viewModel;
 
 //    @Inject
@@ -51,6 +57,21 @@ public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends M
         getPresenter().detachView();
         removeActivityFromTransitionManager();
         super.onDestroy();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        boolean result = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+        switch (requestCode) {
+            case REQUEST_LOCATION:
+                onLocationPermissionResponse(result);
+                break;
+        }
+    }
+
+    public void requestLocationPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
     }
 
     /**
@@ -111,6 +132,10 @@ public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends M
     }
 
     protected void init() {
+        // Nothing to do here. Just for extends creation in childs.
+    }
+
+    protected void onLocationPermissionResponse(boolean granted) {
         // Nothing to do here. Just for extends creation in childs.
     }
 

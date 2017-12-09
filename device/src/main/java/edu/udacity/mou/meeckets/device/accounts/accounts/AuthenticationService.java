@@ -1,4 +1,4 @@
-package edu.udacity.mou.meeckets.device.accounts;
+package edu.udacity.mou.meeckets.device.accounts.accounts;
 
 import android.app.Service;
 import android.content.Intent;

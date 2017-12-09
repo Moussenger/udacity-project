@@ -5,9 +5,12 @@ import javax.inject.Named;
 import dagger.Module;
 import dagger.Provides;
 import edu.udacity.mou.meeckets.domain.device.IMeecketsAccountManager;
+import edu.udacity.mou.meeckets.domain.device.IMeecketsLocationProvider;
+import edu.udacity.mou.meeckets.domain.device.IMeecketsPermissionChecker;
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogin;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournaments;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.UpdateTournamentsLocation;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
 import edu.udacity.mou.meeckets.domain.repositories.tournaments.ITournamentsRepository;
 import io.reactivex.Scheduler;
@@ -34,6 +37,12 @@ public class InteractorsModule {
     GetTournaments provideGetTournaments(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
                                          ITournamentsRepository tournamentsRepository) {
         return new GetTournaments(backgroundThread, mainThread, tournamentsRepository);
+    }
+
+    @Provides
+    UpdateTournamentsLocation providerUpdateTournamentsLocation(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                                                IMeecketsPermissionChecker permissionChecker, IMeecketsLocationProvider locationProvider) {
+        return new UpdateTournamentsLocation(backgroundThread, mainThread, locationProvider, permissionChecker);
     }
 
 }
