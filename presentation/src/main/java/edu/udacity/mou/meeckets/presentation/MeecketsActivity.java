@@ -30,14 +30,6 @@ public abstract class MeecketsActivity<P extends MeecketsPresenter, VM extends M
 
     private VM viewModel;
 
-//    @Inject
-//    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-//
-//    @Override
-//    public AndroidInjector<Fragment> supportFragmentInjector() {
-//        return fragmentDispatchingAndroidInjector;
-//    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

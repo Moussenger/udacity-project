@@ -32,17 +32,11 @@ public class MeecketsApplication extends Application implements HasActivityInjec
     @Override
     public void onCreate() {
         super.onCreate();
-        if (canInitApp()) {
-            configDI();
-            configTimber();
-            configStetho();
-            configRx();
-        }
-
-    }
-
-    private boolean canInitApp() {
-        return setupLeakCanary() != RefWatcher.DISABLED;
+        setupLeakCanary();
+        configDI();
+        configTimber();
+        configStetho();
+        configRx();
     }
 
     private RefWatcher setupLeakCanary() {
@@ -65,7 +59,9 @@ public class MeecketsApplication extends Application implements HasActivityInjec
     }
 
     private void configStetho() {
-        Stetho.initializeWithDefaults(this);
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this);
+        }
     }
 
     private void configRx() {

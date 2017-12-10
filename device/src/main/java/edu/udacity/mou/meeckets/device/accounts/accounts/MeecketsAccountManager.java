@@ -2,6 +2,7 @@ package edu.udacity.mou.meeckets.device.accounts.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -19,6 +20,9 @@ import edu.udacity.mou.meeckets.domain.exceptions.accounts.GetAccessTokenExcepti
 
 @Singleton
 public class MeecketsAccountManager implements IMeecketsAccountManager {
+    public static final String AUTHORITY = "edu.udacity.mou.meeckets.data";
+    private static final long INTERVAL_TIME = 2 * 3600;
+
     private Context context;
     private String accountType;
     private String accountName;
@@ -50,6 +54,17 @@ public class MeecketsAccountManager implements IMeecketsAccountManager {
             accountManager.setAuthToken(account, tokenName, token);
         } else {
             throw new CreateAccountException();
+        }
+    }
+
+    @Override
+    public void initSync() throws AccountDoesNotExistException {
+        Account account = getAccount();
+
+        if (account != null) {
+            ContentResolver.setIsSyncable(account, AUTHORITY, 1);
+            ContentResolver.setSyncAutomatically(account, AUTHORITY, true);
+            ContentResolver.addPeriodicSync(account, AUTHORITY, new Bundle(), INTERVAL_TIME);
         }
     }
 

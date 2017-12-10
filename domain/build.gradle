@@ -4,8 +4,6 @@ apply plugin: 'net.ltgt.apt'
 def globalConfig = rootProject.extensions.getByName("ext")
 def deps = rootProject.ext
 
-
-
 dependencies {
     apt deps.lombok
     compileOnly deps.lombok

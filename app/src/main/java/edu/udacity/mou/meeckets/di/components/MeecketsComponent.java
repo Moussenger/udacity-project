@@ -37,7 +37,6 @@ import edu.udacity.mou.meeckets.di.modules.presentation.ServiceBuilderModule;
         PermissionsModule.class,
         LocationModule.class,
         ServiceBuilderModule.class
-        //FragmentBuilderModule.class
 })
 @Singleton
 public interface MeecketsComponent {

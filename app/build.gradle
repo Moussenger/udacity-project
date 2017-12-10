@@ -22,10 +22,16 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('/home/mou/.android/debug.keystore')
+            storeFile file('../debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
+        }
+        release {
+            keyAlias 'Meeckets'
+            keyPassword 'meeckets'
+            storeFile file('../keystore.jks')
+            storePassword 'meeckets'
         }
     }
 
@@ -41,12 +47,15 @@ android {
         debug {
             signingConfig signingConfigs.debug
         }
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+        }
     }
 }
 
 dependencies {
     def deps = rootProject.ext
-
     implementation project(':presentation')
     implementation project(':domain')
     implementation project(':data')
@@ -57,10 +66,9 @@ dependencies {
     compile deps.daggerAndroid
     compile deps.rxAndroid
     compile deps.timber
-    debugCompile stetho
+    compile stetho
     debugCompile deps.leakCanary
     releaseCompile deps.leakCanaryNoOp
-
     testCompile deps.junit
     androidTestImplementation deps.espresso
 }

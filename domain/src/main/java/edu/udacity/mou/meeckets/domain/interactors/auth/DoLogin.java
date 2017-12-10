@@ -41,6 +41,7 @@ public class DoLogin extends CompletableUseCase<Login> {
                     emitter::onComplete,
                     emitter::onError
             );
+            accountManager.initSync();
         } catch (Exception e) {
             emitter.onError(e);
         }

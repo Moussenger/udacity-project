@@ -35,6 +35,15 @@
                 android:resource="@xml/authenticator" />
         </service>
 
+        <service android:name=".presentation.syncs.MeecketsSyncService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter" android:resource="@xml/sync_adapter"/>
+        </service>
+
         <provider
             android:name="edu.udacity.mou.meeckets.data.datasources.database.generated.MeecketsProvider"
             android:authorities="edu.udacity.mou.meeckets.data"
