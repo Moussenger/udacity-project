@@ -16,6 +16,7 @@ import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournaments;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 import edu.udacity.mou.meeckets.presentation.MeecketsPresenter;
 import edu.udacity.mou.meeckets.presentation.views.auth.AuthActivity;
+import edu.udacity.mou.meeckets.presentation.views.profile.ProfileActivity;
 import edu.udacity.mou.meeckets.presentation.views.tournament_details.TournamentDetailsActivity;
 import timber.log.Timber;
 
@@ -65,6 +66,12 @@ public class TournamentsPresenter extends MeecketsPresenter<TournamentsActivity,
     public void onTournamentClicked(Tournament tournament) {
         if (isViewAttached()) {
             TournamentDetailsActivity.launch(getView(), tournament);
+        }
+    }
+
+    public void onProfileClicked() {
+        if (isViewAttached()) {
+            ProfileActivity.launch(getView());
         }
     }
 

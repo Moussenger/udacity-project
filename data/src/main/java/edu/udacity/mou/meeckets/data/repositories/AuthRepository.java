@@ -15,6 +15,8 @@ import io.reactivex.Completable;
 import io.reactivex.CompletableEmitter;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
 
 /**
  * Created by mou on 11/9/17.
@@ -35,6 +37,11 @@ public class AuthRepository implements IAuthRepository {
     @Override
     public Observable<User> login(final Login auth) {
         return Observable.create(emitter -> this.login(emitter, auth));
+    }
+
+    @Override
+    public Single<User> getUser() {
+        return Single.create(this::retrieveUser);
     }
 
     @Override
@@ -63,6 +70,14 @@ public class AuthRepository implements IAuthRepository {
             databaseDatasource.addUser(user);
             emitter.onComplete();
         } catch (InsertException e) {
+            emitter.onError(e);
+        }
+    }
+
+    private void retrieveUser(SingleEmitter<User> emitter) {
+        try {
+            emitter.onSuccess(databaseDatasource.getUser());
+        } catch (Exception e) {
             emitter.onError(e);
         }
     }

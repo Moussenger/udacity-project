@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/meeckets_toolbar"
     android:layout_width="match_parent"
@@ -15,4 +15,4 @@
         android:text="@string/app_name"
         tools:text="Meeckets" />
 
-</android.widget.Toolbar>
+</android.support.v7.widget.Toolbar>

@@ -54,6 +54,13 @@ public class MeecketsAccountManager implements IMeecketsAccountManager {
     }
 
     @Override
+    public void deleteAccount() {
+        Account account = new Account(accountName, accountType);
+
+        AccountManager.get(context).removeAccount(account, null, null);
+    }
+
+    @Override
     public String getAccessToken() throws AccountDoesNotExistException, GetAccessTokenException {
         Account account = getAccount();
 

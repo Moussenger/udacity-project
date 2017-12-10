@@ -35,8 +35,8 @@ public class TournamentsViewHolder extends MeecketsViewHolder<Tournament> {
     @BindView(R2.id.tournament_distance_text)
     TextView tournamentDistanceText;
 
-    public TournamentsViewHolder(View itemView, StorageMapper<Tournament> mapper) {
-        super(itemView, mapper);
+    public TournamentsViewHolder(View itemView) {
+        super(itemView);
     }
 
     @Override

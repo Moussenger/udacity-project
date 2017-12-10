@@ -4,4 +4,6 @@
     <integer name="tournamentsSpanCount">2</integer>
 
     <dimen name="tournamentDetailPaddingTop">0dp</dimen>
+
+    <integer name="profile_layout_orientation">0</integer> <!-- 0 = horizontal -->
 </resources>

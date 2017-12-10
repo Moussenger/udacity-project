@@ -16,6 +16,8 @@ import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 public interface IMeecketsDatabaseDatasource {
     void addUser(User user) throws InsertException;
 
+    User getUser();
+
     void deleteUser();
 
     Uri getTournaments();

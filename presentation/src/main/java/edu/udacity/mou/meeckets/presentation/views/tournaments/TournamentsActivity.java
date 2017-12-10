@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -39,6 +41,7 @@ public class TournamentsActivity extends MeecketsToolbarActivity<TournamentsPres
 
     @Override
     protected void init() {
+        super.init();
         configRecyclerView();
         getViewModel().tournamentsCursor().observe(this, this::loadCursor);
     }
@@ -61,6 +64,25 @@ public class TournamentsActivity extends MeecketsToolbarActivity<TournamentsPres
     @Override
     protected String getTag() {
         return TournamentsActivity.class.getSimpleName();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.tournaments_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.item_profile) {
+            presenter.onProfileClicked();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void removeListener() {

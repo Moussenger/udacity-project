@@ -48,6 +48,15 @@ public class MeecketsDatabaseDatasource implements IMeecketsDatabaseDatasource {
     }
 
     @Override
+    public User getUser() {
+        Cursor cursor = context.getContentResolver().query(MeecketsProvider.Users.CONTENT_URI, null, null, null, null);
+        User user = userStorageMapper.single(cursor);
+        cursor.close();
+
+        return user;
+    }
+
+    @Override
     public void deleteUser() {
         context.getContentResolver().delete(MeecketsProvider.Users.CONTENT_URI, null, null);
     }

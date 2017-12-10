@@ -1,8 +1,8 @@
 package edu.udacity.mou.meeckets.presentation;
 
 
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import butterknife.BindView;
 
@@ -19,15 +19,15 @@ public abstract class MeecketsToolbarActivity<P extends MeecketsPresenter, VM ex
 
     @Override
     protected void init() {
-        setActionBar(toolbar);
-        getActionBar().setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         toolbar.setNavigationOnClickListener((v) -> onBackPressed());
     }
 
 
     protected void enableBackButton() {
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     protected void setToolbarTitle(String title) {

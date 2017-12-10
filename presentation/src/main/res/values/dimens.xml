@@ -24,4 +24,6 @@
     <dimen name="tournamentDetailPaddingTop">@dimen/base_item_height</dimen>
     <dimen name="tournamentDetailHorizontalMargin">0dp</dimen>
     <dimen name="tournamentDetailMapHeight">400dp</dimen>
+
+    <integer name="profile_layout_orientation">1</integer> <!-- 1 = vertical -->
 </resources>

@@ -40,6 +40,6 @@ public class TournamentsAdapter extends MeecketsBaseAdapter<TournamentsViewHolde
 
     @Override
     public TournamentsViewHolder createViewHolder(View item) {
-        return new TournamentsViewHolder(item, getMapper());
+        return new TournamentsViewHolder(item);
     }
 }

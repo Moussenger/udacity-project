@@ -21,13 +21,11 @@ import edu.udacity.mou.meeckets.presentation.views.tournaments.TournamentsActivi
 
 public class AuthPresenter extends MeecketsPresenter<AuthActivity, AuthViewModel> {
     private DoLogin doLogin;
-    private CheckLogin checkLogin;
 
     @Inject
     public AuthPresenter(DoLogin doLogin, CheckLogin checkLogin) {
         super(checkLogin);
         this.doLogin = doLogin;
-        this.checkLogin = checkLogin;
     }
 
     @Override

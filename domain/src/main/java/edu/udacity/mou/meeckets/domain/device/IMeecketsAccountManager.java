@@ -13,5 +13,7 @@ public interface IMeecketsAccountManager {
 
     void saveAccount(String token) throws CreateAccountException;
 
+    void deleteAccount();
+
     String getAccessToken() throws AccountDoesNotExistException, GetAccessTokenException;
 }

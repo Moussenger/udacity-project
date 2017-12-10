@@ -24,6 +24,8 @@
 
         <activity android:name=".presentation.views.tournament_details.TournamentDetailsActivity" />
 
+        <activity android:name=".presentation.views.profile.ProfileActivity" />
+
         <service android:name="edu.udacity.mou.meeckets.device.accounts.accounts.AuthenticationService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />

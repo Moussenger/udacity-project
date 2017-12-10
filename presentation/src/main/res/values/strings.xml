@@ -11,7 +11,13 @@
     <string name="error_deleting_subscription">Error deleting subscription</string>
     <string name="error_loading_subscription">Error loading subscription</string>
 
+    <string name="menu_profile">profile</string>
+
     <string name="date_relative_less_minute">Less than a minute</string>
+    <string name="logout_message">Do you want to logout?</string>
+    <string name="logout_title">Logout</string>
+    <string name="logout">logout</string>
+    <string name="cancel">cancel</string>
     <plurals name="date_relative_minutes">
         <item quantity="one">%d minute left</item>
         <item quantity="other">%d minutes left</item>

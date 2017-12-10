@@ -9,6 +9,8 @@ import edu.udacity.mou.meeckets.domain.device.IMeecketsLocationProvider;
 import edu.udacity.mou.meeckets.domain.device.IMeecketsPermissionChecker;
 import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogin;
+import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogout;
+import edu.udacity.mou.meeckets.domain.interactors.auth.GetUser;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.AddSubscription;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.DeleteSubscription;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.DeleteSubscriptions;
@@ -31,6 +33,18 @@ public class InteractorsModule {
     DoLogin provideDoLogin(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
                            IAuthRepository authRepository, IMeecketsAccountManager accountManager) {
         return new DoLogin(backgroundThread, mainThread, authRepository, accountManager);
+    }
+
+    @Provides
+    DoLogout provideDoLogout(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                             ISubscriptionsRepository subscriptionsRepository, IMeecketsAccountManager accountManager) {
+        return new DoLogout(backgroundThread, mainThread, subscriptionsRepository, accountManager);
+    }
+
+    @Provides
+    GetUser provideGetUser(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                           IAuthRepository authRepository) {
+        return new GetUser(backgroundThread, mainThread, authRepository);
     }
 
     @Provides
