@@ -18,6 +18,7 @@ import edu.udacity.mou.meeckets.di.modules.device.PermissionsModule;
 import edu.udacity.mou.meeckets.di.modules.domain.InteractorsModule;
 import edu.udacity.mou.meeckets.di.modules.domain.SchedulersModule;
 import edu.udacity.mou.meeckets.di.modules.presentation.ActivityBuilderModule;
+import edu.udacity.mou.meeckets.di.modules.presentation.ServiceBuilderModule;
 
 /**
  * Created by mou on 11/11/17.
@@ -34,7 +35,8 @@ import edu.udacity.mou.meeckets.di.modules.presentation.ActivityBuilderModule;
         ActivityBuilderModule.class,
         AccountsModule.class,
         PermissionsModule.class,
-        LocationModule.class
+        LocationModule.class,
+        ServiceBuilderModule.class
         //FragmentBuilderModule.class
 })
 @Singleton

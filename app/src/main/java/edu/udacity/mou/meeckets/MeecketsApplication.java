@@ -2,6 +2,7 @@ package edu.udacity.mou.meeckets;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Service;
 
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import dagger.android.HasServiceInjector;
 import edu.udacity.mou.meeckets.di.components.DaggerMeecketsComponent;
 import io.reactivex.plugins.RxJavaPlugins;
 import timber.log.Timber;
@@ -20,9 +22,12 @@ import timber.log.Timber;
  * Created by mou on 11/11/17.
  */
 
-public class MeecketsApplication extends Application implements HasActivityInjector {
+public class MeecketsApplication extends Application implements HasActivityInjector, HasServiceInjector {
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
+
+    @Inject
+    DispatchingAndroidInjector<Service> serviceDispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
@@ -70,5 +75,10 @@ public class MeecketsApplication extends Application implements HasActivityInjec
     @Override
     public AndroidInjector<Activity> activityInjector() {
         return activityDispatchingAndroidInjector;
+    }
+
+    @Override
+    public AndroidInjector<Service> serviceInjector() {
+        return serviceDispatchingAndroidInjector;
     }
 }

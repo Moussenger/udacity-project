@@ -17,6 +17,7 @@ import edu.udacity.mou.meeckets.domain.model.tournaments.Subscription;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 import edu.udacity.mou.meeckets.presentation.MeecketsPresenter;
 import edu.udacity.mou.meeckets.presentation.R;
+import edu.udacity.mou.meeckets.presentation.homescreenwidgets.SubscriptionsWidget;
 import edu.udacity.mou.meeckets.presentation.views.auth.AuthActivity;
 import timber.log.Timber;
 
@@ -81,6 +82,14 @@ public class TournamentDetailsPresenter extends MeecketsPresenter<TournamentDeta
         }
     }
 
+    private void onSubscriptionChanged() {
+        if (isViewAttached()) {
+            SubscriptionsWidget.updateWidgets(getView().getApplicationContext());
+        }
+
+        loadSubscription();
+    }
+
     private void onLoadSubscription(Subscription subscription) {
         getViewModel().subscription(subscription);
     }
@@ -117,12 +126,12 @@ public class TournamentDetailsPresenter extends MeecketsPresenter<TournamentDeta
             Tournament tournament = getViewModel().tournament().getValue();
 
             addSubscription.run(tournament).subscribe(
-                    this::loadSubscription,
+                    this::onSubscriptionChanged,
                     this::onAddSubscriptionError
             );
         } else {
             deleteSubscription.run(subscription).subscribe(
-                    this::loadSubscription,
+                    this::onSubscriptionChanged,
                     this::onDeleteSubscriptionError
             );
         }

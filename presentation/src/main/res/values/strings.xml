@@ -20,6 +20,7 @@
     <string name="cancel">cancel</string>
     <string name="load_tournament_error">Error loading tournament</string>
     <string name="empty_subscriptions">You do not have subscriptions</string>
+    <string name="subscriptions">Subscriptions</string>
     <plurals name="date_relative_minutes">
         <item quantity="one">%d minute left</item>
         <item quantity="other">%d minutes left</item>
