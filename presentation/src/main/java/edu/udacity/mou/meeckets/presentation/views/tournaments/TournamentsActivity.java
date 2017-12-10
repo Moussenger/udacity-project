@@ -78,7 +78,7 @@ public class TournamentsActivity extends MeecketsToolbarActivity<TournamentsPres
         int itemId = item.getItemId();
 
         if (itemId == R.id.item_profile) {
-            presenter.onProfileClicked();
+            getPresenter().onProfileClicked();
             return true;
         }
 

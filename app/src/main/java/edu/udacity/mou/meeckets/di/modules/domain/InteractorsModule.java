@@ -16,6 +16,7 @@ import edu.udacity.mou.meeckets.domain.interactors.tournaments.DeleteSubscriptio
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.DeleteSubscriptions;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetSubscription;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetSubscriptions;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournament;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournaments;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.UpdateTournamentsLocation;
 import edu.udacity.mou.meeckets.domain.repositories.auth.IAuthRepository;
@@ -57,6 +58,12 @@ public class InteractorsModule {
     GetTournaments provideGetTournaments(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
                                          ITournamentsRepository tournamentsRepository) {
         return new GetTournaments(backgroundThread, mainThread, tournamentsRepository);
+    }
+
+    @Provides
+    GetTournament provideGetTournament(@Named("background") Scheduler backgroundThread, @Named("main") Scheduler mainThread,
+                                       ITournamentsRepository tournamentsRepository) {
+        return new GetTournament(backgroundThread, mainThread, tournamentsRepository);
     }
 
     @Provides

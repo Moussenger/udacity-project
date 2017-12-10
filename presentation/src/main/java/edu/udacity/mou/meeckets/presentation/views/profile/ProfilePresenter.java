@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -17,10 +18,14 @@ import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogout;
 import edu.udacity.mou.meeckets.domain.interactors.auth.GetUser;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetSubscriptions;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournament;
 import edu.udacity.mou.meeckets.domain.model.auth.User;
+import edu.udacity.mou.meeckets.domain.model.tournaments.Subscription;
+import edu.udacity.mou.meeckets.domain.model.tournaments.Tournament;
 import edu.udacity.mou.meeckets.presentation.MeecketsPresenter;
 import edu.udacity.mou.meeckets.presentation.R;
 import edu.udacity.mou.meeckets.presentation.views.auth.AuthActivity;
+import edu.udacity.mou.meeckets.presentation.views.tournament_details.TournamentDetailsActivity;
 import timber.log.Timber;
 
 /**
@@ -33,15 +38,17 @@ public class ProfilePresenter extends MeecketsPresenter<ProfileActivity, Profile
     private DoLogout doLogout;
     private GetSubscriptions getSubscriptions;
     private GetUser getUser;
+    private GetTournament getTournament;
     private LoaderManager loaderManager;
 
     @Inject
     public ProfilePresenter(DoLogout doLogout, GetSubscriptions getSubscriptions,
-                            CheckLogin checkLogin, GetUser getUser) {
+                            CheckLogin checkLogin, GetUser getUser, GetTournament getTournament) {
         super(checkLogin);
         this.doLogout = doLogout;
         this.getSubscriptions = getSubscriptions;
         this.getUser = getUser;
+        this.getTournament = getTournament;
     }
 
     @Override
@@ -73,6 +80,26 @@ public class ProfilePresenter extends MeecketsPresenter<ProfileActivity, Profile
                     .setNegativeButton(R.string.cancel, (dialog, id) -> dialog.dismiss())
                     .create()
                     .show();
+        }
+    }
+
+    public void onSubscriptionClicked(Subscription subscription) {
+        getTournament.run(subscription.getId()).subscribe(
+                this::goToTournamentDetails,
+                this::onLoadTournamentError);
+    }
+
+    private void goToTournamentDetails(Tournament tournament) {
+        if (isViewAttached()) {
+            TournamentDetailsActivity.launch(getView(), tournament);
+        }
+    }
+
+    private void onLoadTournamentError(Throwable t) {
+        Timber.e(t);
+
+        if (isViewAttached()) {
+            Toast.makeText(getView(), R.string.load_tournament_error, Toast.LENGTH_SHORT).show();
         }
     }
 

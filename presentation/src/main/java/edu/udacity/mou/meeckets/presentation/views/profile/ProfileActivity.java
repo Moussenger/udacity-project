@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,6 +16,7 @@ import edu.udacity.mou.meeckets.presentation.MeecketsToolbarActivity;
 import edu.udacity.mou.meeckets.presentation.R;
 import edu.udacity.mou.meeckets.presentation.R2;
 import edu.udacity.mou.meeckets.presentation.views.profile.adapters.SubscriptionsAdapter;
+import edu.udacity.mou.meeckets.presentation.widgets.EmptyRecyclerView;
 
 /**
  * Created by mou on 11/11/17.
@@ -38,7 +38,10 @@ public class ProfileActivity extends MeecketsToolbarActivity<ProfilePresenter, P
     TextView usernameTextView;
 
     @BindView(R2.id.profile_subscriptions_list)
-    RecyclerView subscriptionsRecyclerView;
+    EmptyRecyclerView subscriptionsRecyclerView;
+
+    @BindView(R2.id.profile_empty_text)
+    TextView emptyTextView;
 
     @Override
     public int layout() {
@@ -66,7 +69,7 @@ public class ProfileActivity extends MeecketsToolbarActivity<ProfilePresenter, P
         int itemId = item.getItemId();
 
         if (itemId == R.id.item_logout) {
-            presenter.onLogoutClicked();
+            getPresenter().onLogoutClicked();
             return true;
         }
 
@@ -91,7 +94,8 @@ public class ProfileActivity extends MeecketsToolbarActivity<ProfilePresenter, P
     private void configRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 
-        //adapter.setListener(getPresenter()::onTournamentClicked);
+        adapter.setListener(getPresenter()::onSubscriptionClicked);
+        subscriptionsRecyclerView.setEmptyView(emptyTextView);
         subscriptionsRecyclerView.setHasFixedSize(true);
         subscriptionsRecyclerView.setLayoutManager(layoutManager);
         subscriptionsRecyclerView.setAdapter(adapter);

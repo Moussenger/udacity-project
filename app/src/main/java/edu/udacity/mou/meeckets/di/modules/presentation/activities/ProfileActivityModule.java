@@ -7,6 +7,7 @@ import edu.udacity.mou.meeckets.domain.interactors.auth.CheckLogin;
 import edu.udacity.mou.meeckets.domain.interactors.auth.DoLogout;
 import edu.udacity.mou.meeckets.domain.interactors.auth.GetUser;
 import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetSubscriptions;
+import edu.udacity.mou.meeckets.domain.interactors.tournaments.GetTournament;
 import edu.udacity.mou.meeckets.domain.model.tournaments.Subscription;
 import edu.udacity.mou.meeckets.presentation.views.profile.ProfileActivity;
 import edu.udacity.mou.meeckets.presentation.views.profile.ProfilePresenter;
@@ -21,8 +22,8 @@ public class ProfileActivityModule {
 
     @Provides
     ProfilePresenter provideProfilePresenter(DoLogout doLogout, GetSubscriptions getSubscriptions,
-                                             GetUser getUser, CheckLogin checkLogin) {
-        return new ProfilePresenter(doLogout, getSubscriptions, checkLogin, getUser);
+                                             GetUser getUser, CheckLogin checkLogin, GetTournament getTournament) {
+        return new ProfilePresenter(doLogout, getSubscriptions, checkLogin, getUser, getTournament);
     }
 
     @Provides

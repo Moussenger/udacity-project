@@ -22,6 +22,8 @@ public interface IMeecketsDatabaseDatasource {
 
     Uri getTournaments();
 
+    Tournament getTournament(long id);
+
     void saveTournaments(List<Tournament> tournaments);
 
     void addSubscription(Subscription subscription);

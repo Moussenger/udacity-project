@@ -18,6 +18,8 @@
     <string name="logout_title">Logout</string>
     <string name="logout">logout</string>
     <string name="cancel">cancel</string>
+    <string name="load_tournament_error">Error loading tournament</string>
+    <string name="empty_subscriptions">You do not have subscriptions</string>
     <plurals name="date_relative_minutes">
         <item quantity="one">%d minute left</item>
         <item quantity="other">%d minutes left</item>

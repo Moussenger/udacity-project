@@ -67,6 +67,15 @@ public class MeecketsDatabaseDatasource implements IMeecketsDatabaseDatasource {
     }
 
     @Override
+    public Tournament getTournament(long id) {
+        Cursor cursor = context.getContentResolver().query(MeecketsProvider.Tournaments.CONTENT_URI, null, "id=?", new String[]{String.valueOf(id)}, null);
+        Tournament tournament = tournamentStorageMapper.single(cursor);
+        cursor.close();
+
+        return tournament;
+    }
+
+    @Override
     public void saveTournaments(List<Tournament> tournaments) {
         ContentValues[] contentValues = tournamentStorageMapper.values(tournaments);
 
