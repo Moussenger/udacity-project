@@ -21,8 +21,6 @@ ext {
     leakCanaryVersion = '1.5.4'
     stethoVersion = '1.5.0'
     lombokVersion = '1.16.18'
-    retrofitVersion = '2.3.0'
-    gsonVersion = '2.8.2'
     daggerVersion = '2.13'
     rxAndroidVersion = '2.0.1'
     rxJavaVersion = '2.1.6'
@@ -47,9 +45,6 @@ ext {
     leakCanaryNoOp = "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
     stetho = "com.facebook.stetho:stetho:${stethoVersion}"
     lombok = "org.projectlombok:lombok:${lombokVersion}"
-    retrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-    retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
-    gson = "com.google.code.gson:gson:${gsonVersion}"
     schematic = "net.simonvt.schematic:schematic:${schematicVersion}"
     schematicCompiler = "net.simonvt.schematic:schematic-compiler:${schematicVersion}"
     rxAndroid = "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
