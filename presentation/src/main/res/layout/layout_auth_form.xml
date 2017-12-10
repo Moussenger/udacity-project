@@ -18,7 +18,7 @@
         style="@style/Meeckets.Widget.AuthEditText"
         android:layout_width="@dimen/auth_controls_size"
         android:layout_height="wrap_content"
-        android:hint="Username"
+        android:hint="@string/username_hint"
         android:inputType="text" />
 
     <EditText
@@ -26,7 +26,7 @@
         style="@style/Meeckets.Widget.AuthEditText"
         android:layout_width="@dimen/auth_controls_size"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/password_hint"
         android:inputType="textPassword" />
 
     <FrameLayout
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:text="login" />
+            android:text="@string/login_button" />
 
         <ProgressBar
             android:id="@+id/auth_loading_progress"
